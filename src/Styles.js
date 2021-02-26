@@ -6,6 +6,8 @@ export const colors = {
 	pink: 'hsl(0,100%,80%)',
 	background: 'hsl(252,94%,67%)',
 	hoverBackground: 'hsl(252, 100%, 73%)',
+	altBackground: 'hsl(231, 20%, 27%)',
+	accent: 'hsl(231,20%,61%)',
 };
 
 export const lightColors = {
@@ -13,8 +15,6 @@ export const lightColors = {
 	background: 'hsl(231, 67%, 99%)',
 	hoverText: 'hsl(231, 36%, 63%)',
 	hoverBackground: 'hsl(231, 73%, 93%)',
-	btn3Text: 'hsl(231,20%,61%)',
-	btn3Background: 'hsl(231, 20%, 27%)',
 	btn4Background: 'hsl(231, 28%, 7%)',
 };
 
@@ -61,7 +61,7 @@ export const Button4 = styled.button`
 	height: 48px;
 	width: 133px;
 	color: ${({ darkMode }) =>
-		darkMode ? darkColors.text : lightColors.btn3Text};
+		darkMode ? darkColors.text : colors.accent};
 	background-color: 'hsl(231, 20%, 27%)';
 	&:hover {
 		background-color: ${({ darkMode }) =>
