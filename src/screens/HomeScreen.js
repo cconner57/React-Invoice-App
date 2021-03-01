@@ -1,4 +1,9 @@
 import React from 'react';
+
+import {colors} from '../Styles'
+
+colors.white
+
 import {
 	Button1,
 	Button2,
