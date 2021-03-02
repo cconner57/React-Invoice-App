@@ -15,7 +15,7 @@ export const lightColors = {
 	background: 'hsl(231, 67%, 99%)',
 	hoverText: 'hsl(231, 36%, 63%)',
 	hoverBackground: 'hsl(231, 73%, 93%)',
-	btn4Background: 'hsl(231, 28%, 7%)',
+	darkText: 'hsl(231, 28%, 7%)',
 };
 
 export const darkColors = {
@@ -65,7 +65,7 @@ export const Button4 = styled.button`
 	background-color: 'hsl(231, 20%, 27%)';
 	&:hover {
 		background-color: ${({ darkMode }) =>
-			darkMode ? darkColors.btn4Background : lightColors.btn4Background};
+			darkMode ? darkColors.btn4Background : lightColors.darkText};
 	}
 `;
 
