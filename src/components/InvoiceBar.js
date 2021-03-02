@@ -24,7 +24,9 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 							<input
 								type='checkbox'
 								id='draft'
-								onChange={() => setFilter('draft')}
+								onChange={(e) =>
+									e.target.checked ? setFilter('draft') : setFilter(undefined)
+								}
 								checked={filter === 'draft' ? true : false}
 							/>
 							Draft
@@ -33,7 +35,9 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 							<input
 								type='checkbox'
 								id='pending'
-								onChange={() => setFilter('pending')}
+								onChange={(e) =>
+									e.target.checked ? setFilter('pending') : setFilter(undefined)
+								}
 								checked={filter === 'pending' ? true : false}
 							/>
 							Pending
@@ -42,7 +46,9 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 							<input
 								type='checkbox'
 								id='paid'
-								onChange={() => setFilter('paid')}
+								onChange={(e) =>
+									e.target.checked ? setFilter('paid') : setFilter(undefined)
+								}
 								checked={filter === 'paid' ? true : false}
 							/>
 							Paid

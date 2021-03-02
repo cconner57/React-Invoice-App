@@ -26,4 +26,5 @@ export default App;
 
 const AppContainer = styled.div`
 	display: flex;
+	background-color: hsl(0,0%,95%);
 `;
