@@ -136,3 +136,10 @@ export const Body2 = styled.p`
 	line-height: 18px;
 	letter-spacing: -0.23px;
 `;
+
+export const Body3 = styled.p`
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 20px;
+	letter-spacing: -0.31px;
+`

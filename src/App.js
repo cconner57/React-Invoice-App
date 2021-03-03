@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import HomeScreen from './screens/HomeScreen';
 import Nav from './components/Nav';
+import HomeScreen from './screens/HomeScreen';
+import InvoiceScreen from './screens/InvoiceScreen';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<ScrollToTop />
 				<Nav />
 				<Switch>
+					<Route path='/:id' component={InvoiceScreen} />
 					<Route path='/' exact component={HomeScreen} />
 				</Switch>
 				<GlobalStyle />
@@ -26,5 +28,5 @@ export default App;
 
 const AppContainer = styled.div`
 	display: flex;
-	background-color: hsl(0,0%,95%);
+	background-color: hsl(0, 0%, 95%);
 `;

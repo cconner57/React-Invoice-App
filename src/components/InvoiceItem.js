@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Status from './Status';
 import { H3, H3Alt, Body1, colors } from '../Styles';
 
 import rightArrow from '../images/icon-arrow-right.svg';
@@ -21,7 +24,7 @@ const InvoiceItem = ({ item }) => {
 	};
 
 	return (
-		<Container accent={status}>
+		<Container to={`/${id}`}>
 			<H3Alt className='ID'>
 				<span>#</span>
 				{id}
@@ -29,10 +32,7 @@ const InvoiceItem = ({ item }) => {
 			<Body1>{modifyDate(paymentDue)}</Body1>
 			<Body1>{clientName}</Body1>
 			<H3>${addComma(total)}</H3>
-			<div className='Status'>
-				&#9679;
-				<H3Alt>{status}</H3Alt>
-			</div>
+			<Status status={status} />
 			<img src={rightArrow} alt='Right Arrow' />
 		</Container>
 	);
@@ -40,14 +40,15 @@ const InvoiceItem = ({ item }) => {
 
 export default InvoiceItem;
 
-const Container = styled.div`
+const Container = styled(Link)`
 	min-height: 72px;
-	min-width: 730px;
+	max-width: 730px;
 	margin-bottom: 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
 	border-radius: 8px;
+	text-decoration: none;
 	background: hsl(0, 0%, 100%);
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
 	.ID {
@@ -63,34 +64,9 @@ const Container = styled.div`
 	}
 	p + h3 {
 		width: 120px;
-	}
-	.Status {
-		min-height: 40px;
-		width: 104px;
-		margin: 0 20px 0 40px;
-        padding: 0 10px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 6px;
-		color: ${({ accent }) =>
-			accent === 'paid'
-				? 'hsl(160,67%,52%)'
-				: accent === 'pending'
-				? 'hsl(34, 100%, 50%)'
-				: 'hsl(231,20%,27%)'};
-		background-color: ${({ accent }) =>
-			accent === 'paid'
-				? 'hsl(162, 71%, 97%)'
-				: accent === 'pending'
-				? 'hsl(30, 70%, 96%)'
-				: 'hsl(0,0%,59%)'};
-		h3 {
-			margin-left: 8px;
-			text-transform: capitalize;
-		}
+		margin-right: 40px;
 	}
 	img {
-		margin-right: 24px;
+		margin: 0 24px 0 20px;
 	}
 `;
