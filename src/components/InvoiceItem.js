@@ -1,27 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { H3, H3Alt, Body1, colors, lightColors } from '../Styles';
+import { addComma, modifyDate } from '../Utility';
 
 import Status from './Status';
-import { H3, H3Alt, Body1, colors } from '../Styles';
 
 import rightArrow from '../images/icon-arrow-right.svg';
 
 const InvoiceItem = ({ item }) => {
 	const { id, paymentDue, clientName, total, status } = item;
-
-	const addComma = (price) => {
-		return price.toLocaleString('en-US', { minimumFractionDigits: 0 });
-	};
-
-	const modifyDate = (date) => {
-		const newDate = new Date(date + 'T00:00:00')
-			.toString()
-			.slice(4, 15)
-			.split('');
-		newDate.splice(6, 0, ',');
-		return newDate.join('');
-	};
 
 	return (
 		<Container to={`/${id}`}>
@@ -53,6 +41,9 @@ const Container = styled(Link)`
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
 	.ID {
 		margin: 0 43px 0 32px;
+	}
+	h3 {
+		color: ${lightColors.darkText};
 	}
 	span,
 	p {

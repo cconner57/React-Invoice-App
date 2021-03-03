@@ -60,8 +60,7 @@ export const Button3 = styled.button`
 export const Button4 = styled.button`
 	height: 48px;
 	width: 133px;
-	color: ${({ darkMode }) =>
-		darkMode ? darkColors.text : colors.accent};
+	color: ${({ darkMode }) => (darkMode ? darkColors.text : colors.accent)};
 	background-color: 'hsl(231, 20%, 27%)';
 	&:hover {
 		background-color: ${({ darkMode }) =>
@@ -109,6 +108,13 @@ export const H2 = styled.h2`
 	letter-spacing: -0.63px;
 `;
 
+export const H2Alt = styled.h2`
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 32px;
+	letter-spacing: -0.5px;
+`;
+
 export const H3 = styled.h3`
 	font-weight: 700;
 	font-size: 16px;
@@ -142,4 +148,4 @@ export const Body3 = styled.p`
 	font-size: 15px;
 	line-height: 20px;
 	letter-spacing: -0.31px;
-`
+`;

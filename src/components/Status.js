@@ -22,11 +22,11 @@ const Container = styled.div`
 	justify-content: center;
 	border-radius: 6px;
 	color: ${({ accent }) =>
-		accent === 'paid'
-			? 'hsl(160,67%,52%)'
-			: accent === 'pending'
-			? 'hsl(34, 100%, 50%)'
-			: 'hsl(231,20%,27%)'};
+			accent === 'paid'
+				? 'hsl(160,67%,52%)'
+				: accent === 'pending'
+				? 'hsl(34, 100%, 50%)'
+				: 'hsl(231,20%,27%)'};
 	background-color: ${({ accent }) =>
 		accent === 'paid'
 			? 'hsl(162, 71%, 97%)'
@@ -36,5 +36,11 @@ const Container = styled.div`
 	h3 {
 		margin-left: 8px;
 		text-transform: capitalize;
+		color: ${({ accent }) =>
+			accent === 'paid'
+				? 'hsl(160,67%,52%)'
+				: accent === 'pending'
+				? 'hsl(34, 100%, 50%)'
+				: 'hsl(231,20%,27%)'};
 	}
 `;

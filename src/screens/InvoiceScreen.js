@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Status from '../components/Status';
 import styled from 'styled-components';
 import {
+	H2Alt,
 	H3,
 	H3Alt,
 	Body1,
@@ -13,12 +14,15 @@ import {
 	lightColors,
 } from '../Styles';
 
+import DeleteItem from '../components/DeleteItem';
+
 import LeftArrow from '../images/icon-arrow-left.svg';
 
 import InvoiceData from '../data.json';
 
 const InvoiceScreen = ({ location, history }) => {
 	const [invoice, setInvoice] = useState(undefined);
+	const [toggleModal, setToggleModal] = useState(false);
 
 	useEffect(() => {
 		const getId = location.pathname.slice(1);
@@ -40,7 +44,9 @@ const InvoiceScreen = ({ location, history }) => {
 							<Status status={invoice.status} />
 						</div>
 						<Button3>Edit</Button3>
-						<Button5>Delete</Button5>
+						<Button5 onClick={() => setToggleModal(!toggleModal)}>
+							Delete
+						</Button5>
 						<Button2>Mark as Paid</Button2>
 					</div>
 					<div className='Details'>
@@ -97,12 +103,15 @@ const InvoiceScreen = ({ location, history }) => {
 								))}
 							</table>
 							<div className='Total'>
-								<p>Amount Due</p>
-								<p>${invoice.total.toFixed(2)}</p>
+								<Body2>Amount Due</Body2>
+								<H2Alt>${invoice.total.toFixed(2)}</H2Alt>
 							</div>
 						</div>
 					</div>
 				</>
+			)}
+			{toggleModal && (
+				<DeleteItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
 			)}
 		</Container>
 	);
@@ -114,6 +123,7 @@ const Container = styled.div`
 	height: 100vh;
 	width: 730px;
 	margin: 0 auto;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -167,15 +177,16 @@ const Container = styled.div`
 			.Description {
 				display: flex;
 				flex-direction: column;
-                span, p {
-                    color: ${lightColors.text};
-                }
+				span,
+				p {
+					color: ${lightColors.text};
+				}
 			}
 			.Sender {
 				display: flex;
 				flex-direction: column;
 				text-align: end;
-                color: ${lightColors.text};
+				color: ${lightColors.text};
 			}
 		}
 		.MidRow {
@@ -188,12 +199,12 @@ const Container = styled.div`
 				flex-direction: column;
 				color: ${lightColors.text};
 				p:nth-child(even) {
-                    margin-top: 12px;
+					margin-top: 12px;
 					color: ${lightColors.darkText};
 				}
-                p:nth-child(2) {
-                    margin-bottom: 32px;
-                }
+				p:nth-child(2) {
+					margin-bottom: 32px;
+				}
 			}
 			.BillTo {
 				display: flex;
@@ -210,7 +221,7 @@ const Container = styled.div`
 				margin-right: 123px;
 				color: ${lightColors.text};
 				p:nth-child(2) {
-                    margin-top: 12px;
+					margin-top: 12px;
 					color: ${lightColors.darkText};
 				}
 			}

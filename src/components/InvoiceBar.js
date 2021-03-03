@@ -6,7 +6,7 @@ import Arrow from '../images/icon-arrow-down.svg';
 import Plus from '../images/icon-plus.svg';
 
 const InvoiceBar = ({ total, filter, setFilter }) => {
-	const [toggle, setToggle] = useState(false);
+	const [toggleFilter, setToggleFilter] = useState(false);
 
 	return (
 		<Container>
@@ -15,10 +15,10 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 				<Body1>{total > 0 ? `There are ${total} total` : 'No'} invoices</Body1>
 			</div>
 			<Options>
-				<Body1 onClick={() => setToggle(!toggle)}>
+				<Body1 onClick={() => setToggleFilter(!toggleFilter)}>
 					Filter by status <img src={Arrow} alt='arrow down' />
 				</Body1>
-				{toggle && (
+				{toggleFilter && (
 					<Checkboxes>
 						<label htmlFor='draft'>
 							<input
