@@ -37,7 +37,8 @@ export const Button1 = styled.button`
 
 export const Button2 = styled.button`
 	height: 48px;
-	width: 131px;
+	width: auto;
+	padding: 0 24px;
 	color: ${colors.white};
 	background-color: ${colors.background};
 	&:hover {
@@ -47,7 +48,8 @@ export const Button2 = styled.button`
 
 export const Button3 = styled.button`
 	height: 48px;
-	width: 73px;
+	width: auto;
+	padding: 0 24px;
 	color: ${({ darkMode }) => (darkMode ? darkColors.text : lightColors.text)};
 	background-color: ${({ darkMode }) =>
 		darkMode ? darkColors.background : lightColors.background};
@@ -59,9 +61,10 @@ export const Button3 = styled.button`
 
 export const Button4 = styled.button`
 	height: 48px;
-	width: 133px;
+	width: auto;
+	padding: 0 24px;
 	color: ${({ darkMode }) => (darkMode ? darkColors.text : colors.accent)};
-	background-color: 'hsl(231, 20%, 27%)';
+	background-color: hsl(231, 20%,27%);
 	&:hover {
 		background-color: ${({ darkMode }) =>
 			darkMode ? darkColors.btn4Background : lightColors.darkText};
@@ -80,7 +83,7 @@ export const Button5 = styled.button`
 
 export const Button6 = styled.button`
 	height: 48px;
-	width: 350px;
+	width: 100%;
 	color: ${lightColors.hoverText};
 	background-color: ${lightColors.background};
 	&:hover {

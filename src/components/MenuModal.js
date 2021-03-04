@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const MenuModal = ({ children, setToggleMenu }) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
-			const outsideForm = document.querySelector('.Modal');
-			if (e.target !== outsideForm) setToggleMenu(false);
+			const outsideForm = document.querySelector('.ModalContainer');
+			if (e.target === outsideForm) setToggleMenu(false);
 		},
 		[setToggleMenu]
 	);
@@ -19,7 +19,7 @@ const MenuModal = ({ children, setToggleMenu }) => {
 	}, [handleOutsideClick]);
 
 	return ReactDom.createPortal(
-		<Container>
+		<Container className='ModalContainer'>
 			<div className='Modal'>{children}</div>
 		</Container>,
 		document.getElementById('menu')
