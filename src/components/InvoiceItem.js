@@ -37,7 +37,7 @@ const Container = styled(Link)`
 	justify-content: space-evenly;
 	border-radius: 8px;
 	text-decoration: none;
-	background: hsl(0, 0%, 100%);
+	background-color: hsl(0, 0%, 100%);
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
 	.ID {
 		margin: 0 43px 0 32px;

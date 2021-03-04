@@ -15,6 +15,8 @@ import {
 } from '../Styles';
 
 import DeleteItem from '../components/DeleteItem';
+import MenuModal from '../components/MenuModal';
+import EditItem from '../components/EditItem';
 
 import LeftArrow from '../images/icon-arrow-left.svg';
 
@@ -23,6 +25,7 @@ import InvoiceData from '../data.json';
 const InvoiceScreen = ({ location, history }) => {
 	const [invoice, setInvoice] = useState(undefined);
 	const [toggleModal, setToggleModal] = useState(false);
+	const [toggleMenu, setToggleMenu] = useState(false);
 
 	useEffect(() => {
 		const getId = location.pathname.slice(1);
@@ -43,7 +46,7 @@ const InvoiceScreen = ({ location, history }) => {
 							<Body1>Status</Body1>
 							<Status status={invoice.status} />
 						</div>
-						<Button3>Edit</Button3>
+						<Button3  onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
 						<Button5 onClick={() => setToggleModal(!toggleModal)}>
 							Delete
 						</Button5>
@@ -113,6 +116,11 @@ const InvoiceScreen = ({ location, history }) => {
 			{toggleModal && (
 				<DeleteItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
 			)}
+			{toggleMenu && (
+				<MenuModal setToggleMenu={setToggleMenu}>
+					<EditItem />
+				</MenuModal>
+			)}
 		</Container>
 	);
 };
@@ -124,6 +132,7 @@ const Container = styled.div`
 	width: 730px;
 	margin: 0 auto;
 	position: relative;
+	z-index: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

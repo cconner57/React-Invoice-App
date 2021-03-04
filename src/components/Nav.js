@@ -4,7 +4,7 @@ import { colors } from '../Styles';
 
 import Logo from '../images/logo.svg';
 import Moon from '../images/icon-moon.svg';
-import Sun from '../images/icon-sun.svg';
+// import Sun from '../images/icon-sun.svg';
 
 const Nav = () => {
 	return (
@@ -34,6 +34,7 @@ const NavContainer = styled.nav`
     justify-content: space-between;
 	border-radius: 0px 20px 20px 0px;
 	background-color: ${colors.altBackground};
+	z-index: 10;
 	.LogoContainer {
 		height: 103px;
 		width: 103px;
