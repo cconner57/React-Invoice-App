@@ -40,7 +40,7 @@ const Container = styled.div`
 	.Modal {
 		height: 100vh;
 		width: 50vw;
-		padding: 56px 56px 56px 150px;
+		padding: 40px 0px 0px 150px;
 		position: absolute;
 		top: 0;
 		left: 0;

@@ -4,7 +4,19 @@ import { H3Alt, Body1, Button6 } from '../Styles';
 
 import ListItem from './ListItem';
 
-const InputForm = () => {
+const InputForm = ({ invoice }) => {
+	console.log(invoice);
+	const {
+		clientAddress,
+		clientEmail,
+		clientName,
+		description,
+		items,
+		paymentDue,
+		paymentTerms,
+		total,
+		senderAddress,
+	} = invoice;
 	return (
 		<Container>
 			<div className='BillFrom'>
@@ -14,23 +26,23 @@ const InputForm = () => {
 					type='text'
 					name='street'
 					id='street'
-					placeholder='Enter Street Address'
+					value={senderAddress.street}
 				/>
 				<label htmlFor='city'>City</label>
-				<input type='text' name='city' id='city' placeholder='Enter City' />
+				<input type='text' name='city' id='city' value={senderAddress.city} />
 				<label htmlFor='postalCode'>Post Code</label>
 				<input
 					type='text'
 					name='postalCode'
 					id='postalCode'
-					placeholder='Enter Postal Code'
+					value={senderAddress.postCode}
 				/>
 				<label htmlFor='country'>Country</label>
 				<input
 					type='text'
 					name='country'
 					id='country'
-					placeholder='Enter Country'
+					value={senderAddress.country}
 				/>
 			</div>
 			<div className='BillTo'>
@@ -40,60 +52,67 @@ const InputForm = () => {
 					type='text'
 					name='clientName'
 					id='clientName'
-					placeholder='Enter Name'
+					value={clientName}
 				/>
 				<label htmlFor='clientEmail'>Client's Email</label>
 				<input
 					type='text'
 					name='clientEmail'
 					id='clientEmail'
-					placeholder='Enter Email'
+					value={clientEmail}
+					placeholder='e.g. email@example.com'
 				/>
 				<label htmlFor='clientStreet'>Street Address</label>
 				<input
 					type='text'
 					name='clientStreet'
 					id='clientStreet'
-					placeholder='Enter Street Address'
+					value={clientAddress.street}
 				/>
 				<label htmlFor='clientCity'>City</label>
 				<input
 					type='text'
 					name='clientCity'
 					id='clientCity'
-					placeholder='Enter City'
+					value={clientAddress.city}
 				/>
 				<label htmlFor='clientPostCode'>Post Code</label>
 				<input
 					type='text'
 					name='clientPostCode'
 					id='clientPostCode'
-					placeholder='Enter Postal Code'
+					value={clientAddress.postCode}
 				/>
 				<label htmlFor='clientCountry'>Country</label>
 				<input
 					type='text'
 					name='clientCountry'
 					id='clientCountry'
-					placeholder='Enter Country'
+					value={clientAddress.country}
 				/>
 			</div>
 			<div className='InvoiceDetail'>
 				<label htmlFor='invoiceDate'>Invoice Date</label>
-				<input type='date' name='invoiceDate' id='invoiceDate' />
+				<input
+					type='date'
+					name='invoiceDate'
+					id='invoiceDate'
+					value={paymentDue}
+				/>
 				<label htmlFor='paymentTerms'>Payment Terms</label>
-                <select name="paymentTerms" id="paymentTerms">
-                    <option value="1">Net 1 Day</option>
-                    <option value="7">Net 7 Day</option>
-                    <option value="14">Net 14 Day</option>
-                    <option value="30">Net 30 Day</option>
-                </select>
+				<select name='paymentTerms' id='paymentTerms' value={paymentTerms}>
+					<option value='1'>Net 1 Day</option>
+					<option value='7'>Net 7 Day</option>
+					<option value='14'>Net 14 Day</option>
+					<option value='30'>Net 30 Day</option>
+				</select>
 				<label htmlFor='description'>Project Description</label>
 				<input
 					type='text'
 					name='description'
 					id='description'
-					placeholder='Enter Description'
+					value={description}
+					placeholder='e.g. Graphic Design Service'
 				/>
 			</div>
 			<div className='InvoiceItems'>
@@ -104,7 +123,9 @@ const InputForm = () => {
 					<Body1>Price</Body1>
 					<Body1>Total</Body1>
 				</div>
-				<ListItem />
+				{items.map((item, key) => (
+					<ListItem key={key} item={item} total={total} />
+				))}
 				<Button6>+ Add New Item</Button6>
 			</div>
 		</Container>
@@ -114,6 +135,9 @@ const InputForm = () => {
 export default InputForm;
 
 const Container = styled.div`
+	h3 {
+		color: hsl(252, 94%, 67%);
+	}
 	label {
 		font-weight: 500;
 		font-size: 12px;
@@ -121,7 +145,9 @@ const Container = styled.div`
 		letter-spacing: -0.25px;
 		color: hsl(231, 36%, 63%);
 	}
-	input[type='text'], input[type='date'], select {
+	input[type='text'],
+	input[type='date'],
+	select {
 		height: 48px;
 		padding: 14px 20px;
 		border-radius: 4px;
@@ -136,7 +162,7 @@ const Container = styled.div`
 	.BillFrom {
 		height: 209px;
 		width: 504px;
-		margin: 48px 0;
+		margin: 2.25rem 0 1.75rem;
 		display: grid;
 		grid-template-columns: repeat(3, 152px);
 		grid-template-rows: auto;
@@ -269,7 +295,7 @@ const Container = styled.div`
 		width: 504px;
 		margin-top: 20px;
 		.ItemList {
-            margin-bottom: 16px;
+			margin-bottom: 16px;
 			font-weight: 700;
 			font-size: 18px;
 			line-height: 32px;
@@ -289,6 +315,9 @@ const Container = styled.div`
 		}
 		p:nth-child(3) {
 			width: 100px;
+		}
+		h3 {
+			color: hsl(0, 0%, 0%);
 		}
 	}
 `;

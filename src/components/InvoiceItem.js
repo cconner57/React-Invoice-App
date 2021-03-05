@@ -39,6 +39,9 @@ const Container = styled(Link)`
 	text-decoration: none;
 	background-color: hsl(0, 0%, 100%);
 	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.5);
+	&:hover {
+		border: 1px solid hsl(252, 94%, 67%);
+	}
 	.ID {
 		margin: 0 43px 0 32px;
 	}

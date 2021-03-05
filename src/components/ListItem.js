@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 import Delete from '../images/icon-delete.svg';
 
-const ListItem = () => {
+const ListItem = ({ item }) => {
+	const { name, quantity, price, total } = item;
 	return (
 		<Container>
-			<input type='text' name='itemName' id='itemName' />
-			<input type='text' name='qty' id='qty' />
-			<input type='text' name='price' id='price' />
-			<h3>0.00</h3>
+			<input type='text' name='itemName' id='itemName' value={name} />
+			<input type='text' name='qty' id='qty' value={quantity} />
+			<input type='text' name='price' id='price' value={price.toFixed(2)} />
+			<h3>{total.toFixed(2)}</h3>
 			<img src={Delete} alt='Delete' />
 		</Container>
 	);
@@ -36,7 +37,7 @@ const Container = styled.div`
 	}
 	img {
 		width: 20px;
-        margin: 10px 0;
+		margin: 10px 0;
 		cursor: pointer;
 	}
 	#itemName {

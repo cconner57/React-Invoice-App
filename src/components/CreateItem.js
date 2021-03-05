@@ -7,7 +7,7 @@ import InputForm from './InputForm';
 const CreateItem = () => {
 	return (
 		<Container>
-			<H2Alt className='Title'>Create Item</H2Alt>
+			<H2Alt className='Title'>New Invoice</H2Alt>
 			<form onSubmit={(e) => e.preventDefault()}>
 				<InputForm />
 				<div className='ButtonGroup'>
@@ -28,14 +28,11 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
-	.Title {
-		margin-bottom: 24px;
-		color: hsl(252, 94%, 67%);
 	}
 	.ButtonGroup {
 		width: 504px;
-		margin-top: 39px;
-		margin-bottom: 80px;
+		margin-top: 30px;
+		margin-bottom: 60px;
 		display: flex;
 		button:first-child {
 			margin-right: auto;

@@ -118,7 +118,7 @@ const InvoiceScreen = ({ location, history }) => {
 			)}
 			{toggleMenu && (
 				<MenuModal setToggleMenu={setToggleMenu}>
-					<EditItem />
+					<EditItem invoice={invoice} />
 				</MenuModal>
 			)}
 		</Container>
@@ -146,6 +146,10 @@ const Container = styled.div`
 		h3 {
 			margin-top: 3px;
 			margin-left: 15px;
+			transition: color 0.25s ease;
+			&:hover {
+				color: hsl(231, 36%, 63%);
+			}
 		}
 	}
 	.Options {
