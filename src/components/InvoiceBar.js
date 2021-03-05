@@ -17,7 +17,18 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 		<Container>
 			<div>
 				<H1>Invoices</H1>
-				<Body1>{total > 0 ? `There are ${total} total` : 'No'} invoices</Body1>
+				<Body1>
+					{filter === 'draft'
+						? `There are ${total} draft`
+						: filter === 'pending'
+						? `There are ${total} pending`
+						: filter === 'paid'
+						? `There are ${total} paid`
+						: total > 0
+						? `There are ${total} total`
+						: 'No'}{' '}
+					invoices
+				</Body1>
 			</div>
 			<Options>
 				<Body1 onClick={() => setToggleFilter(!toggleFilter)}>
@@ -48,12 +59,14 @@ export default InvoiceBar;
 
 const Container = styled.div`
 	width: 730px;
-	margin: 72px 0 65px;
+	margin: 72px 0 3rem;
 	display: relative;
 	z-index: 0;
 	display: flex;
 	justify-content: space-between;
 	h1 + p {
+		padding-top: 2px;
+		font-size: 0.9rem;
 		color: ${colors.accent};
 	}
 `;

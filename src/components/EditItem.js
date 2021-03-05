@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { H2Alt, Button2, Button3, Button4 } from '../Styles';
+import { H2Alt, Button2, Button3 } from '../Styles';
 
 import InputForm from './InputForm';
 

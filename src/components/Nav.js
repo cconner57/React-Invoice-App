@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { colors } from '../Styles';
 
 import Logo from '../images/logo.svg';
-import Moon from '../images/icon-moon.svg';
-import Sun from '../images/icon-sun.svg';
+import { ReactComponent as Moon } from '../images/icon-moon.svg';
+import { ReactComponent as Sun } from '../images/icon-sun.svg';
 
 const Nav = () => {
 	const [darkMode, setDarkMode] = useState(false);
@@ -16,9 +16,9 @@ const Nav = () => {
 			</div>
 			<div className='Settings'>
 				{darkMode ? (
-					<img src={Sun} alt='Dark Mode' onClick={() => setDarkMode(false)} />
+					<Sun onClick={() => setDarkMode(false)} />
 				) : (
-					<img src={Moon} alt='Dark Mode' onClick={() => setDarkMode(true)} />
+					<Moon onClick={() => setDarkMode(true)} />
 				)}
 				<hr />
 				<img
@@ -48,7 +48,6 @@ const NavContainer = styled.nav`
 		overflow: hidden;
 		border-radius: 0px 20px 20px 0px;
 		background-color: ${colors.background};
-
 		img {
 			height: 37.71px;
 			width: 40px;
@@ -68,16 +67,21 @@ const NavContainer = styled.nav`
 		background-color: ${colors.hoverBackground};
 	}
 	.Settings {
-		height: 141px;
+		height: auto;
 		width: 103px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
-		img:first-child {
-			height: 20px;
-			width: 20px;
+		svg {
+			margin: 0 0 20px -5px;
 			cursor: pointer;
+			path:first-child {
+				transition: fill 0.5s ease;
+				&:hover {
+					fill: hsl(0, 0%, 100%);
+				}
+			}
 		}
 		hr {
 			height: 1px;
@@ -85,8 +89,8 @@ const NavContainer = styled.nav`
 			background-color: ${colors.accent};
 		}
 		img:last-child {
-			height: 40px;
 			width: 40px;
+			margin: 20px 0;
 			border-radius: 50%;
 		}
 	}
