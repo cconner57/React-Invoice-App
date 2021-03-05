@@ -46,7 +46,7 @@ const InvoiceScreen = ({ location, history }) => {
 							<Body1>Status</Body1>
 							<Status status={invoice.status} />
 						</div>
-						<Button3  onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
+						<Button3 onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
 						<Button5 onClick={() => setToggleModal(!toggleModal)}>
 							Delete
 						</Button5>
@@ -100,7 +100,7 @@ const InvoiceScreen = ({ location, history }) => {
 									<tr key={key}>
 										<td>{item.name}</td>
 										<td>{item.quantity}</td>
-										<td>{item.price}</td>
+										<td>${item.price}</td>
 										<td>{item.total}</td>
 									</tr>
 								))}
@@ -129,7 +129,7 @@ export default InvoiceScreen;
 
 const Container = styled.div`
 	height: 100vh;
-	width: 730px;
+	width: auto;
 	margin: 0 auto;
 	position: relative;
 	z-index: 0;
@@ -140,11 +140,12 @@ const Container = styled.div`
 	.Back {
 		display: flex;
 		align-items: center;
-		margin-bottom: 32px;
+		margin-bottom: 20px;
 		align-self: flex-start;
 		cursor: pointer;
 		h3 {
-			margin-left: 23.5px;
+			margin-top: 3px;
+			margin-left: 15px;
 		}
 	}
 	.Options {
@@ -170,10 +171,10 @@ const Container = styled.div`
 		}
 	}
 	.Details {
-		height: 631px;
+		height: auto;
 		width: 730px;
 		margin-top: 24px;
-		padding: 48px;
+		padding: 35px 48px;
 		display: flex;
 		flex-direction: column;
 		background-color: #ffffff;
@@ -236,10 +237,9 @@ const Container = styled.div`
 			}
 		}
 		.Items {
-			height: 264px;
+			height: auto;
 			width: 634px;
-			margin-top: 45px;
-			padding-top: 32px;
+			margin-top: 30px;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
@@ -250,7 +250,6 @@ const Container = styled.div`
 				margin: 0 32px;
 				border-spacing: 0 32px;
 				th:first-child {
-					height: 18px;
 					width: 250px;
 					text-align: start;
 				}
