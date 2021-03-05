@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const MenuModal = ({ children, setToggleMenu }) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
-			const outsideForm = document.querySelector('.ModalContainer');
-			if (e.target === outsideForm) setToggleMenu(false);
+			if (!document.querySelector('.Modal').contains(e.target))
+				setToggleMenu(false);
 		},
 		[setToggleMenu]
 	);

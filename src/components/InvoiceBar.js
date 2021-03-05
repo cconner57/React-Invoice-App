@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { H1, Body1, Button1, H3Alt, colors } from '../Styles';
 
 import MenuModal from '../components/MenuModal';
+import FilterInvoices from '../components/FilterInvoices';
 import CreateItem from '../components/CreateItem';
 
 import Arrow from '../images/icon-arrow-down.svg';
@@ -11,21 +12,6 @@ import Plus from '../images/icon-plus.svg';
 const InvoiceBar = ({ total, filter, setFilter }) => {
 	const [toggleFilter, setToggleFilter] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
-
-	const handleOutsideClick = useCallback(
-		(e) => {
-			const outsideForm = document.querySelector('.Checkboxes');
-			if (e.target !== outsideForm) setToggleFilter(false);
-		},
-		[setToggleMenu]
-	);
-
-	useEffect(() => {
-		window.addEventListener('click', handleOutsideClick);
-		return () => {
-			window.removeEventListener('click', handleOutsideClick);
-		};
-	}, [handleOutsideClick]);
 
 	return (
 		<Container>
@@ -38,41 +24,11 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 					Filter by status <img src={Arrow} alt='arrow down' />
 				</Body1>
 				{toggleFilter && (
-					<Checkboxes className='Checkboxes'>
-						<label htmlFor='draft'>
-							<input
-								type='checkbox'
-								id='draft'
-								onChange={(e) =>
-									e.target.checked ? setFilter('draft') : setFilter(undefined)
-								}
-								checked={filter === 'draft' ? true : false}
-							/>
-							Draft
-						</label>
-						<label htmlFor='pending'>
-							<input
-								type='checkbox'
-								id='pending'
-								onChange={(e) =>
-									e.target.checked ? setFilter('pending') : setFilter(undefined)
-								}
-								checked={filter === 'pending' ? true : false}
-							/>
-							Pending
-						</label>
-						<label htmlFor='paid'>
-							<input
-								type='checkbox'
-								id='paid'
-								onChange={(e) =>
-									e.target.checked ? setFilter('paid') : setFilter(undefined)
-								}
-								checked={filter === 'paid' ? true : false}
-							/>
-							Paid
-						</label>
-					</Checkboxes>
+					<FilterInvoices
+						setToggleFilter={setToggleFilter}
+						filter={filter}
+						setFilter={setFilter}
+					/>
 				)}
 				<Button1 onClick={() => setToggleMenu(!toggleMenu)}>
 					<img src={Plus} alt='Add Invoice' />
@@ -130,31 +86,6 @@ const Options = styled.div`
 		}
 		h3 {
 			margin-right: 15px;
-		}
-	}
-`;
-
-const Checkboxes = styled.div`
-	height: 128px;
-	width: 192px;
-	padding: 20px 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	position: absolute;
-	top: 55px;
-	left: -40px;
-	border-radius: 8px;
-	background-color: hsl(0, 0%, 100%);
-	box-shadow: 0px 10px 20px hsla(232, 37.7%, 45.3%, 0.25);
-	label {
-		margin-left: 24px;
-		user-select: none;
-		cursor: pointer;
-		input {
-			margin-right: 13px;
-			user-select: none;
-			cursor: pointer;
 		}
 	}
 `;

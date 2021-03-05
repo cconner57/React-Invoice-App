@@ -19,7 +19,7 @@ const InvoiceItem = ({ item }) => {
 			</H3Alt>
 			<Body1>{modifyDate(paymentDue)}</Body1>
 			<Body1>{clientName}</Body1>
-			<H3>${addComma(total)}</H3>
+			<H3>${(addComma(total))}</H3>
 			<Status status={status} />
 			<img src={rightArrow} alt='Right Arrow' />
 		</Container>

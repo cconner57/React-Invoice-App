@@ -1,5 +1,5 @@
 export const addComma = (price) => {
-    return price.toLocaleString('en-US', { minimumFractionDigits: 0 });
+    return price.toLocaleString('en-US', { minimumFractionDigits: 2 });
 };
 
 export const modifyDate = (date) => {
