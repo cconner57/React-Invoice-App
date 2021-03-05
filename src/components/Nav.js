@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../Styles';
 
 import Logo from '../images/logo.svg';
 import Moon from '../images/icon-moon.svg';
-// import Sun from '../images/icon-sun.svg';
+import Sun from '../images/icon-sun.svg';
 
 const Nav = () => {
+	const [darkMode, setDarkMode] = useState(false);
+
 	return (
 		<NavContainer>
 			<div className='LogoContainer'>
 				<img src={Logo} alt='Logo' />
 			</div>
 			<div className='Settings'>
-				<img src={Moon} alt='Dark Mode' />
-                <hr />
+				{darkMode ? (
+					<img src={Sun} alt='Dark Mode' onClick={() => setDarkMode(false)} />
+				) : (
+					<img src={Moon} alt='Dark Mode' onClick={() => setDarkMode(true)} />
+				)}
+				<hr />
 				<img
 					src={process.env.PUBLIC_URL + '/images/image-avatar.jpg'}
 					alt='Profile'
@@ -29,9 +35,9 @@ export default Nav;
 const NavContainer = styled.nav`
 	height: 100vh;
 	width: 103px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	border-radius: 0px 20px 20px 0px;
 	background-color: ${colors.altBackground};
 	z-index: 10;
@@ -66,22 +72,22 @@ const NavContainer = styled.nav`
 		width: 103px;
 		display: flex;
 		flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
+		justify-content: space-evenly;
+		align-items: center;
 		img:first-child {
 			height: 20px;
 			width: 20px;
-            cursor: pointer;
+			cursor: pointer;
 		}
-        hr {
-            height: 1px;
-            width: 100%;
-            background-color: ${colors.accent};
-        }
+		hr {
+			height: 1px;
+			width: 100%;
+			background-color: ${colors.accent};
+		}
 		img:last-child {
 			height: 40px;
 			width: 40px;
-            border-radius: 50%;
+			border-radius: 50%;
 		}
 	}
 `;

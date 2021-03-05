@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { H1, Body1, Button1, H3Alt, colors } from '../Styles';
 
@@ -12,6 +12,21 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 	const [toggleFilter, setToggleFilter] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
+	const handleOutsideClick = useCallback(
+		(e) => {
+			const outsideForm = document.querySelector('.Checkboxes');
+			if (e.target !== outsideForm) setToggleFilter(false);
+		},
+		[setToggleMenu]
+	);
+
+	useEffect(() => {
+		window.addEventListener('click', handleOutsideClick);
+		return () => {
+			window.removeEventListener('click', handleOutsideClick);
+		};
+	}, [handleOutsideClick]);
+
 	return (
 		<Container>
 			<div>
@@ -23,7 +38,7 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 					Filter by status <img src={Arrow} alt='arrow down' />
 				</Body1>
 				{toggleFilter && (
-					<Checkboxes>
+					<Checkboxes className='Checkboxes'>
 						<label htmlFor='draft'>
 							<input
 								type='checkbox'
@@ -76,7 +91,6 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 export default InvoiceBar;
 
 const Container = styled.div`
-	height: 59px;
 	width: 730px;
 	margin: 72px 0 65px;
 	display: relative;
