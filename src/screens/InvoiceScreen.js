@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Status from '../components/Status';
+import { addComma } from '../Utility.js';
 import styled from 'styled-components';
 import {
 	H2Alt,
 	H3,
-	H3Alt,
 	Body1,
 	Body2,
 	Body3,
@@ -37,7 +37,7 @@ const InvoiceScreen = ({ location, history }) => {
 		<Container>
 			<div className='Back' onClick={() => history.goBack()}>
 				<img src={LeftArrow} alt='Go Back' />
-				<H3Alt>Go back</H3Alt>
+				<H3>Go back</H3>
 			</div>
 			{invoice && (
 				<>
@@ -100,14 +100,14 @@ const InvoiceScreen = ({ location, history }) => {
 									<tr key={key}>
 										<td>{item.name}</td>
 										<td>{item.quantity}</td>
-										<td>${item.price}</td>
-										<td>{item.total}</td>
+										<td>${addComma(item.price)}</td>
+										<td>{addComma(item.total)}</td>
 									</tr>
 								))}
 							</table>
 							<div className='Total'>
 								<Body2>Amount Due</Body2>
-								<H2Alt>${invoice.total.toFixed(2)}</H2Alt>
+								<H2Alt>${addComma(invoice.total)}</H2Alt>
 							</div>
 						</div>
 					</div>
@@ -143,9 +143,11 @@ const Container = styled.div`
 		margin-bottom: 20px;
 		align-self: flex-start;
 		cursor: pointer;
+		img {
+			width: 12px;
+		}
 		h3 {
-			margin-top: 3px;
-			margin-left: 15px;
+			margin-left: 10px;
 			transition: color 0.25s ease;
 			&:hover {
 				color: hsl(231, 36%, 63%);
