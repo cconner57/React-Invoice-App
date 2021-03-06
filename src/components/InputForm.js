@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { H3Alt, Body1, Button6 } from '../Styles';
+import { H3Alt, Body1, Button6, Warning } from '../Styles';
 
 import ListItem from './ListItem';
 
 const InputForm = ({ invoice }) => {
-	console.log(invoice);
+	const [error, setError] = useState(false);
+
 	const {
 		clientAddress,
 		clientEmail,
@@ -17,6 +18,7 @@ const InputForm = ({ invoice }) => {
 		total,
 		senderAddress,
 	} = invoice;
+
 	return (
 		<Container>
 			<div className='BillFrom'>
@@ -128,6 +130,7 @@ const InputForm = ({ invoice }) => {
 				))}
 				<Button6>+ Add New Item</Button6>
 			</div>
+			{error && <Warning>&#8226; All fields must be added</Warning>}
 		</Container>
 	);
 };
@@ -149,9 +152,15 @@ const Container = styled.div`
 	input[type='date'],
 	select {
 		height: 48px;
-		padding: 14px 20px;
+		padding: 10px 10px;
+		font-size: 1rem;
 		border-radius: 4px;
 		border: 1px solid hsl(231, 75%, 93%);
+		caret-color: hsl(252, 94%, 67%);
+		&:focus {
+			outline: none;
+			border: 1px solid hsl(252, 94%, 67%);
+		}
 	}
 	input[type='text']::placeholder {
 		font-weight: 500;
@@ -164,7 +173,7 @@ const Container = styled.div`
 		width: 504px;
 		margin: 2.25rem 0 1.75rem;
 		display: grid;
-		grid-template-columns: repeat(3, 152px);
+		grid-template-columns: repeat(3, 160px);
 		grid-template-rows: auto;
 		grid-template-areas:
 			'title . .'
@@ -172,7 +181,7 @@ const Container = styled.div`
 			'input1 input1 input1'
 			'city post country'
 			'input2 input3 input4';
-		gap: 0 24px;
+		gap: 0 20px;
 		h3 {
 			grid-area: title;
 		}
@@ -205,7 +214,7 @@ const Container = styled.div`
 		height: 402px;
 		width: 504px;
 		display: grid;
-		grid-template-columns: repeat(3, 152px);
+		grid-template-columns: repeat(3, 160px);
 		grid-template-rows: auto;
 		grid-template-areas:
 			'title . .'
@@ -217,7 +226,7 @@ const Container = styled.div`
 			'input3 input3 input3'
 			'city post country'
 			'input4 input5 input6';
-		gap: 0 24px;
+		gap: 0 20px;
 		h3 {
 			grid-area: title;
 		}
@@ -263,14 +272,14 @@ const Container = styled.div`
 		width: 504px;
 		margin-top: 20px;
 		display: grid;
-		grid-template-columns: repeat(4, 108px);
+		grid-template-columns: repeat(4, 115px);
 		grid-template-rows: auto;
 		grid-template-areas:
 			'date1 . terms1 .'
 			'dateinput1 dateinput1 input2 input2'
 			'description description . .'
 			'input3 input3 input3 input3';
-		gap: 0 24px;
+		gap: 0 20px;
 		label:nth-child(1) {
 			grid-area: date1;
 		}
@@ -311,10 +320,10 @@ const Container = styled.div`
 			width: 214px;
 		}
 		p:nth-child(2) {
-			width: 46px;
+			width: 48px;
 		}
 		p:nth-child(3) {
-			width: 100px;
+			width: 110px;
 		}
 		h3 {
 			color: hsl(0, 0%, 0%);

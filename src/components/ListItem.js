@@ -27,8 +27,8 @@ const Container = styled.div`
 		padding: 10px;
 	}
 	h3 {
-		width: 60px;
-		margin-right: 10px;
+		width: 65px;
+		margin-right: 15px;
 		color: hsl(225, 14%, 53%);
 		font-weight: 700;
 		font-size: 12px;
@@ -36,8 +36,8 @@ const Container = styled.div`
 		letter-spacing: -0.25px;
 	}
 	img {
-		width: 20px;
-		margin: 10px 0;
+		height: 1.5rem;
+		margin: 0px 0;
 		cursor: pointer;
 	}
 	#itemName {
@@ -47,6 +47,6 @@ const Container = styled.div`
 		width: 46px;
 	}
 	#price {
-		width: 100px;
+		width: 115px;
 	}
 `;

@@ -64,7 +64,7 @@ export const Button4 = styled.button`
 	width: auto;
 	padding: 0 24px;
 	color: ${({ darkMode }) => (darkMode ? darkColors.text : colors.accent)};
-	background-color: hsl(231, 20%,27%);
+	background-color: hsl(231, 20%, 27%);
 	&:hover {
 		background-color: ${({ darkMode }) =>
 			darkMode ? darkColors.btn4Background : lightColors.darkText};
@@ -151,4 +151,20 @@ export const Body3 = styled.p`
 	font-size: 15px;
 	line-height: 20px;
 	letter-spacing: -0.31px;
+`;
+
+export const Warning = styled.p`
+	display: inline-block;
+	margin: 10px 10px 0 0;
+	font-weight: 600;
+	font-size: 0.9rem;
+	line-height: 15px;
+	letter-spacing: -0.21px;
+	color: hsl(0, 0%, 100%);
+	padding: 0.75rem 1.75rem;
+	font-family: 'Poppins', sans-serif;
+	border-radius: 10px;
+	border: 2px solid hsl(0, 80%, 63%);
+	background-color: hsl(0, 60%, 50%);
+	user-select: none;
 `;
