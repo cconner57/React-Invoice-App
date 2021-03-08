@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listInvoiceDetails } from '../actions/invoiceActions';
+import Loader from '../components/Loader';
 import Status from '../components/Status';
 import { addComma } from '../Utility.js';
 import styled from 'styled-components';
@@ -12,6 +15,7 @@ import {
 	Button3,
 	Button5,
 	lightColors,
+	Warning,
 } from '../Styles';
 
 import DeleteItem from '../components/DeleteItem';
@@ -20,18 +24,18 @@ import EditItem from '../components/EditItem';
 
 import LeftArrow from '../images/icon-arrow-left.svg';
 
-import InvoiceData from '../data.json';
-
-const InvoiceScreen = ({ location, history }) => {
-	const [invoice, setInvoice] = useState(undefined);
+const InvoiceScreen = ({ history, match }) => {
 	const [toggleModal, setToggleModal] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
+	const dispatch = useDispatch();
+
+	const invoiceDetails = useSelector((state) => state.listInvoiceDetails);
+	const { loading, error, invoice } = invoiceDetails;
+
 	useEffect(() => {
-		const getId = location.pathname.slice(1);
-		const data = InvoiceData.find((item) => item.id === getId);
-		setInvoice(data);
-	}, [location]);
+		dispatch(listInvoiceDetails(match.params.id));
+	}, [dispatch, match]);
 
 	return (
 		<Container>
@@ -39,7 +43,11 @@ const InvoiceScreen = ({ location, history }) => {
 				<img src={LeftArrow} alt='Go Back' />
 				<H3>Go back</H3>
 			</div>
-			{invoice && (
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Warning>{error}</Warning>
+			) : (
 				<>
 					<div className='Options'>
 						<div className='Status'>
@@ -61,12 +69,12 @@ const InvoiceScreen = ({ location, history }) => {
 								</H3>
 								<Body1>{invoice.description}</Body1>
 							</div>
-							<div className='Sender'>
+							{/* <div className='Sender'>
 								<Body2>{invoice.senderAddress.street}</Body2>
 								<Body2>{invoice.senderAddress.city}</Body2>
 								<Body2>{invoice.senderAddress.postCode}</Body2>
 								<Body2>{invoice.senderAddress.country}</Body2>
-							</div>
+							</div> */}
 						</div>
 						<div className='MidRow'>
 							<div className='Date'>
@@ -75,14 +83,14 @@ const InvoiceScreen = ({ location, history }) => {
 								<Body1>Payment Due</Body1>
 								<Body3>{invoice.paymentDue}</Body3>
 							</div>
-							<div className='BillTo'>
+							{/* <div className='BillTo'>
 								<Body1>Bill To</Body1>
 								<Body3>{invoice.clientName}</Body3>
 								<Body2>{invoice.clientAddress.street}</Body2>
 								<Body2>{invoice.clientAddress.city}</Body2>
 								<Body2>{invoice.clientAddress.postCode}</Body2>
 								<Body2>{invoice.clientAddress.country}</Body2>
-							</div>
+							</div> */}
 							<div className='SentTo'>
 								<Body1>Send to</Body1>
 								<Body3>{invoice.clientEmail}</Body3>
@@ -90,25 +98,29 @@ const InvoiceScreen = ({ location, history }) => {
 						</div>
 						<div className='Items'>
 							<table>
-								<tr>
-									<th>Item Name</th>
-									<th>QTY.</th>
-									<th>Price</th>
-									<th>Total</th>
-								</tr>
-								{invoice.items.map((item, key) => (
-									<tr key={key}>
-										<td>{item.name}</td>
-										<td>{item.quantity}</td>
-										<td>${addComma(item.price)}</td>
-										<td>{addComma(item.total)}</td>
+								<thead>
+									<tr>
+										<th>Item Name</th>
+										<th>QTY.</th>
+										<th>Price</th>
+										<th>Total</th>
 									</tr>
-								))}
+								</thead>
+								<thead>
+									{/* {invoice.items.map((item, key) => (
+										<tr key={key}>
+											<td>{item.name}</td>
+											<td>{item.quantity}</td>
+											<td>${addComma(item.price)}</td>
+											<td>{addComma(item.total)}</td>
+										</tr>
+									))} */}
+								</thead>
 							</table>
-							<div className='Total'>
+							{/* <div className='Total'>
 								<Body2>Amount Due</Body2>
 								<H2Alt>${addComma(invoice.total)}</H2Alt>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</>

@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listInvoices } from '../actions/invoiceActions';
+import Loader from '../components/Loader';
 import styled from 'styled-components';
-import { H2, Body1 } from '../Styles';
+import { H2, Body1, Warning } from '../Styles';
 
 import InvoiceBar from '../components/InvoiceBar';
 import InvoiceItem from '../components/InvoiceItem';
 
-import InvoiceData from '../data.json';
 import Empty from '../images/illustration-empty.svg';
 
 const HomeScreen = () => {
 	const [filter, setFilter] = useState(undefined);
-	const [invoices, setInvoices] = useState(5);
+
+	const dispatch = useDispatch();
+
+	const invoiceList = useSelector((state) => state.invoiceList);
+	const { loading, error, invoices } = invoiceList;
+
+	useEffect(() => {
+		dispatch(listInvoices());
+	}, [dispatch]);
 
 	return (
 		<Container>
-			<InvoiceBar total={invoices} filter={filter} setFilter={setFilter} />
-			{invoices === 0 ? (
+			<InvoiceBar
+				total={
+					filter
+						? invoices.filter((data) => data.status === filter).length
+						: invoices.length
+				}
+				filter={filter}
+				setFilter={setFilter}
+			/>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Warning>{error}</Warning>
+			) : invoices.length === 0 ? (
 				<div className='EmptyInvoices'>
 					<img src={Empty} alt='No invoices' />
 					<H2>There is nothing here</H2>
@@ -27,12 +49,10 @@ const HomeScreen = () => {
 			) : (
 				<div className='InvoiceList'>
 					{filter === undefined
-						? InvoiceData.map((item) => (
-								<InvoiceItem key={item.id} item={item} />
-						  ))
-						: InvoiceData.filter(
-								(data) => data.status === filter
-						  ).map((item, key) => <InvoiceItem key={key} item={item} />)}
+						? invoices.map((item) => <InvoiceItem key={item.id} item={item} />)
+						: invoices
+								.filter((data) => data.status === filter)
+								.map((item, key) => <InvoiceItem key={key} item={item} />)}
 				</div>
 			)}
 		</Container>

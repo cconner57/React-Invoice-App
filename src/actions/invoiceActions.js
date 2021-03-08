@@ -1,4 +1,5 @@
 import axios from 'axios';
+import invoiceData from '../data.json';
 import {
 	INVOICE_LIST_REQUEST,
 	INVOICE_LIST_SUCCESS,
@@ -15,13 +16,14 @@ import {
 	INVOICE_UPDATE_REQUEST,
 	INVOICE_UPDATE_SUCCESS,
 	INVOICE_UPDATE_FAIL,
-} from '../constants/productConstants';
+} from '../constants/invoiceConstants';
 
 export const listInvoices = () => async (dispatch) => {
 	try {
 		dispatch({ type: INVOICE_LIST_REQUEST });
 
-		const { data } = await axios.get(`/api/invoices`);
+		// const { data } = await axios.get(`/api/invoices`);
+		const data = invoiceData;
 
 		dispatch({
 			type: INVOICE_LIST_SUCCESS,
@@ -42,7 +44,8 @@ export const listInvoiceDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: INVOICE_DETAILS_REQUEST });
 
-		const { data } = await axios.get(`/api/invoices/${id}`);
+		// const { data } = await axios.get(`/api/invoices/${id}`);
+		const data = invoiceData.find((item) => item.id === id);
 
 		dispatch({
 			type: INVOICE_DETAILS_SUCCESS,
@@ -59,7 +62,7 @@ export const listInvoiceDetails = (id) => async (dispatch) => {
 	}
 };
 
-export const deleteProduct = (id) => async (dispatch) => {
+export const deleteInvoice = (id) => async (dispatch) => {
 	try {
 		dispatch({
 			type: INVOICE_DELETE_REQUEST,
@@ -82,7 +85,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 	}
 };
 
-export const createProduct = () => async (dispatch) => {
+export const createInvoice = () => async (dispatch) => {
 	try {
 		dispatch({
 			type: INVOICE_CREATE_REQUEST,
@@ -106,7 +109,7 @@ export const createProduct = () => async (dispatch) => {
 	}
 };
 
-export const updateProduct = (invoice) => async (dispatch) => {
+export const updateInvoice = (invoice) => async (dispatch) => {
 	try {
 		dispatch({
 			type: INVOICE_UPDATE_REQUEST,

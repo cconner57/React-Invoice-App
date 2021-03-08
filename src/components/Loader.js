@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { colors } from '../Styles';
 
 const Loader = () => {
 	return <Spinner>Loading...</Spinner>;
@@ -26,30 +27,30 @@ const Spinner = styled.div`
 	width: 11em;
 	height: 11em;
 	border-radius: 50%;
-	background: $primary;
+	background: ${colors.background};
 	background: -moz-linear-gradient(
 		left,
-		$primary 10%,
+		${colors.background} 10%,
 		rgba(255, 255, 255, 0) 42%
 	);
 	background: -webkit-linear-gradient(
 		left,
-		$primary 10%,
+		${colors.background} 10%,
 		rgba(255, 255, 255, 0) 42%
 	);
 	background: -o-linear-gradient(
 		left,
-		$primary 10%,
+		${colors.background} 10%,
 		rgba(255, 255, 255, 0) 42%
 	);
 	background: -ms-linear-gradient(
 		left,
-		$primary 10%,
+		${colors.background} 10%,
 		rgba(255, 255, 255, 0) 42%
 	);
 	background: linear-gradient(
 		to right,
-		$primary 10%,
+		${colors.background} 10%,
 		rgba(255, 255, 255, 0) 42%
 	);
 	position: relative;
@@ -61,7 +62,7 @@ const Spinner = styled.div`
 	&:before {
 		width: 50%;
 		height: 50%;
-		background: $primary;
+		background: ${colors.background};
 		border-radius: 100% 0 0 0;
 		position: absolute;
 		top: 0;

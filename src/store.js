@@ -3,11 +3,11 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
 	invoiceListReducer,
-	invoiceDetailsReducer,
+	listInvoiceDetailsReducer,
 	invoiceDeleteReducer,
 	invoiceCreateReducer,
 	invoiceUpdateReducer,
-} from './reducers/invoiceReducers';
+} from './reducers/invoiceReducer';
 // import {
 // 	userLoginReducer,
 // 	userRegisterReducer,
@@ -18,7 +18,7 @@ import {
 
 const reducer = combineReducers({
 	invoiceList: invoiceListReducer,
-	invoiceDetails: invoiceDetailsReducer,
+	listInvoiceDetails: listInvoiceDetailsReducer,
 	invoiceDelete: invoiceDeleteReducer,
 	invoiceCreate: invoiceCreateReducer,
 	invoiceUpdate: invoiceUpdateReducer,
