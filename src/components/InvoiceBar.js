@@ -98,7 +98,7 @@ const Options = styled.div`
 			background-color: ${colors.white};
 		}
 		h3 {
-			margin-right: 15px;
+			margin-right: 25px;
 		}
 	}
 `;

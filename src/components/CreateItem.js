@@ -8,19 +8,19 @@ import { H2Alt, Button2, Button3, Button4, Warning } from '../Styles';
 import InputForm from './InputForm';
 
 const CreateItem = () => {
-	const [createInvoice, setCreateInvoice] = useState({});
-
-	const dispatch = useDispatch();
-
 	const invoiceState = useSelector((state) => state.invoiceNew);
 	const { loading, error, invoice } = invoiceState;
 
+	const dispatch = useDispatch();
+
+	const [formInvoice, setFormInvoice] = useState(invoice);
+
 	const formHandler = (e) => {
 		e.preventDefault();
-		console.log(e);
+		console.log(formInvoice);
 		// dispatch(createInvoice(createInvoice));
 	};
-
+	
 	useEffect(() => {
 		dispatch(newInvoice());
 	}, [dispatch]);
@@ -34,7 +34,7 @@ const CreateItem = () => {
 				<Warning>{error}</Warning>
 			) : (
 				<form onSubmit={formHandler}>
-					<InputForm invoice={invoice} setInvoice={setCreateInvoice} />
+					<InputForm invoice={formInvoice} setInvoice={setFormInvoice} />
 					<div className='ButtonGroup'>
 						<Button3>Discard</Button3>
 						<Button4>Save as Draft</Button4>
@@ -54,7 +54,6 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
-	}
 	.ButtonGroup {
 		width: 504px;
 		margin-top: 30px;

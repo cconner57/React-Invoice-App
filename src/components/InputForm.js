@@ -5,9 +5,24 @@ import { H3Alt, Body1, Button6, Warning } from '../Styles';
 import ListItem from './FormItem';
 
 const InputForm = ({ invoice, setInvoice }) => {
+	const [senderAddress, setSenderAddress] = useState({});
+	const [clientAddress, setClientAddress] = useState({});
 	const [error, setError] = useState(false);
 
-	const onChangeHandler = () => {};
+	const onChangeHandler = (e) => {
+		const { name, value, dataset } = e.target;
+		if (dataset.address === 'senderAddress') {
+			return setSenderAddress({ ...senderAddress, [name]: value });
+		} else if (dataset.address === 'clientAddress') {
+			return setClientAddress({ ...clientAddress, [name]: value });
+		}
+		setInvoice({
+			...invoice,
+			senderAddress: { ...senderAddress },
+			clientAddress: { ...clientAddress },
+			[name]: value,
+		});
+	};
 
 	return (
 		<Container>
@@ -18,28 +33,36 @@ const InputForm = ({ invoice, setInvoice }) => {
 					type='text'
 					name='street'
 					id='street'
-					value={invoice?.senderAddress.street}
+					data-address='senderAddress'
+					value={invoice?.senderAddress?.street}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='city'>City</label>
 				<input
 					type='text'
 					name='city'
 					id='city'
-					value={invoice?.senderAddress.city}
+					data-address='senderAddress'
+					value={invoice?.senderAddress?.city}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='postalCode'>Post Code</label>
 				<input
 					type='text'
 					name='postalCode'
 					id='postalCode'
-					value={invoice?.senderAddress.postCode}
+					data-address='senderAddress'
+					value={invoice?.senderAddress?.postCode}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='country'>Country</label>
 				<input
 					type='text'
 					name='country'
 					id='country'
-					value={invoice?.senderAddress.country}
+					data-address='senderAddress'
+					value={invoice?.senderAddress?.country}
+					onChange={onChangeHandler}
 				/>
 			</div>
 			<div className='BillTo'>
@@ -50,6 +73,7 @@ const InputForm = ({ invoice, setInvoice }) => {
 					name='clientName'
 					id='clientName'
 					value={invoice?.clientName}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='clientEmail'>Client's Email</label>
 				<input
@@ -58,34 +82,43 @@ const InputForm = ({ invoice, setInvoice }) => {
 					id='clientEmail'
 					value={invoice?.clientEmail}
 					placeholder='e.g. email@example.com'
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='clientStreet'>Street Address</label>
 				<input
 					type='text'
-					name='clientStreet'
+					name='street'
 					id='clientStreet'
-					value={invoice?.clientAddress.street}
+					data-address='clientAddress'
+					value={invoice?.clientAddress?.street}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='clientCity'>City</label>
 				<input
 					type='text'
-					name='clientCity'
+					name='city'
 					id='clientCity'
-					value={invoice?.clientAddress.city}
+					data-address='clientAddress'
+					value={invoice?.clientAddress?.city}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='clientPostCode'>Post Code</label>
 				<input
 					type='text'
-					name='clientPostCode'
+					name='postalCode'
 					id='clientPostCode'
-					value={invoice?.clientAddress.postCode}
+					data-address='clientAddress'
+					value={invoice?.clientAddress?.postCode}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='clientCountry'>Country</label>
 				<input
 					type='text'
-					name='clientCountry'
+					name='country'
 					id='clientCountry'
-					value={invoice?.clientAddress.country}
+					data-address='clientAddress'
+					value={invoice?.clientAddress?.country}
+					onChange={onChangeHandler}
 				/>
 			</div>
 			<div className='InvoiceDetail'>
@@ -95,9 +128,14 @@ const InputForm = ({ invoice, setInvoice }) => {
 					name='invoiceDate'
 					id='invoiceDate'
 					value={invoice?.paymentDue}
+					onChange={onChangeHandler}
 				/>
 				<label htmlFor='paymentTerms'>Payment Terms</label>
-				<select name='paymentTerms' id='paymentTerms' value={invoice?.paymentTerms}>
+				<select
+					name='paymentTerms'
+					id='paymentTerms'
+					value={invoice?.paymentTerms}
+					onChange={onChangeHandler}>
 					<option value='1'>Net 1 Day</option>
 					<option value='7'>Net 7 Day</option>
 					<option value='14'>Net 14 Day</option>
@@ -110,6 +148,7 @@ const InputForm = ({ invoice, setInvoice }) => {
 					id='description'
 					value={invoice?.description}
 					placeholder='e.g. Graphic Design Service'
+					onChange={onChangeHandler}
 				/>
 			</div>
 			<div className='InvoiceItems'>
@@ -121,7 +160,12 @@ const InputForm = ({ invoice, setInvoice }) => {
 					<Body1>Total</Body1>
 				</div>
 				{invoice?.items?.map((item, key) => (
-					<ListItem key={key} item={item} total={invoice?.total} />
+					<ListItem
+						key={key}
+						item={item}
+						total={invoice?.total}
+						changeHandler={onChangeHandler}
+					/>
 				))}
 				<Button6>+ Add New Item</Button6>
 			</div>
