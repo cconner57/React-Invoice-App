@@ -10,6 +10,9 @@ import {
 	INVOICE_DELETE_REQUEST,
 	INVOICE_DELETE_SUCCESS,
 	INVOICE_DELETE_FAIL,
+	INVOICE_NEW_REQUEST,
+	INVOICE_NEW_SUCCESS,
+	INVOICE_NEW_FAIL,
 	INVOICE_CREATE_REQUEST,
 	INVOICE_CREATE_SUCCESS,
 	INVOICE_CREATE_FAIL,
@@ -80,6 +83,53 @@ export const deleteInvoice = (id) => async (dispatch) => {
 				: error.message;
 		dispatch({
 			type: INVOICE_DELETE_FAIL,
+			payload: message,
+		});
+	}
+};
+
+export const newInvoice = () => (dispatch) => {
+	try {
+		dispatch({
+			type: INVOICE_NEW_REQUEST,
+		});
+
+		const data = {
+			id: '',
+			createdAt: '',
+			paymentDue: '',
+			description: '',
+			paymentTerms: '',
+			clientName: '',
+			clientEmail: '',
+			status: '',
+			senderAddress: {
+				street: '',
+				city: '',
+				postCode: '',
+				country: '',
+			},
+			clientAddress: {
+				street: '',
+				city: '',
+				postCode: '',
+				country: '',
+			},
+			items: [],
+			total: 0,
+		};
+
+		dispatch({
+			type: INVOICE_NEW_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+		dispatch({
+			type: INVOICE_NEW_FAIL,
 			payload: message,
 		});
 	}

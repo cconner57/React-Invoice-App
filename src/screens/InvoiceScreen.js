@@ -69,12 +69,12 @@ const InvoiceScreen = ({ history, match }) => {
 								</H3>
 								<Body1>{invoice.description}</Body1>
 							</div>
-							{/* <div className='Sender'>
-								<Body2>{invoice.senderAddress.street}</Body2>
-								<Body2>{invoice.senderAddress.city}</Body2>
-								<Body2>{invoice.senderAddress.postCode}</Body2>
-								<Body2>{invoice.senderAddress.country}</Body2>
-							</div> */}
+							<div className='Sender'>
+								<Body2>{invoice.senderAddress?.street}</Body2>
+								<Body2>{invoice.senderAddress?.city}</Body2>
+								<Body2>{invoice.senderAddress?.postCode}</Body2>
+								<Body2>{invoice.senderAddress?.country}</Body2>
+							</div>
 						</div>
 						<div className='MidRow'>
 							<div className='Date'>
@@ -83,14 +83,14 @@ const InvoiceScreen = ({ history, match }) => {
 								<Body1>Payment Due</Body1>
 								<Body3>{invoice.paymentDue}</Body3>
 							</div>
-							{/* <div className='BillTo'>
+							<div className='BillTo'>
 								<Body1>Bill To</Body1>
 								<Body3>{invoice.clientName}</Body3>
-								<Body2>{invoice.clientAddress.street}</Body2>
-								<Body2>{invoice.clientAddress.city}</Body2>
-								<Body2>{invoice.clientAddress.postCode}</Body2>
-								<Body2>{invoice.clientAddress.country}</Body2>
-							</div> */}
+								<Body2>{invoice.clientAddress?.street}</Body2>
+								<Body2>{invoice.clientAddress?.city}</Body2>
+								<Body2>{invoice.clientAddress?.postCode}</Body2>
+								<Body2>{invoice.clientAddress?.country}</Body2>
+							</div>
 							<div className='SentTo'>
 								<Body1>Send to</Body1>
 								<Body3>{invoice.clientEmail}</Body3>
@@ -107,20 +107,20 @@ const InvoiceScreen = ({ history, match }) => {
 									</tr>
 								</thead>
 								<thead>
-									{/* {invoice.items.map((item, key) => (
+									{invoice.items?.map((item, key) => (
 										<tr key={key}>
 											<td>{item.name}</td>
 											<td>{item.quantity}</td>
 											<td>${addComma(item.price)}</td>
 											<td>{addComma(item.total)}</td>
 										</tr>
-									))} */}
+									))}
 								</thead>
 							</table>
-							{/* <div className='Total'>
+							<div className='Total'>
 								<Body2>Amount Due</Body2>
-								<H2Alt>${addComma(invoice.total)}</H2Alt>
-							</div> */}
+								<H2Alt>${invoice.total && addComma(invoice.total)}</H2Alt>
+							</div>
 						</div>
 					</div>
 				</>

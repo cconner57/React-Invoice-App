@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 import Delete from '../images/icon-delete.svg';
 
-const ListItem = ({ item }) => {
+const FormItem = ({ item }) => {
 	const { name, quantity, price, total } = item;
+	
 	return (
 		<Container>
 			<input type='text' name='itemName' id='itemName' value={name} />
@@ -16,7 +17,7 @@ const ListItem = ({ item }) => {
 	);
 };
 
-export default ListItem;
+export default FormItem;
 
 const Container = styled.div`
 	display: flex;

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { H2Alt, Button2, Button3 } from '../Styles';
 
 import InputForm from './InputForm';
 
 const EditItem = ({ invoice }) => {
+	const [editInvoice, setEditInvoice] = useState(invoice);
+	
 	return (
 		<Container>
 			<H2Alt className='Title'>Edit #{invoice.id}</H2Alt>
 			<form onSubmit={(e) => e.preventDefault()}>
-				<InputForm invoice={invoice} />
+				<InputForm invoice={editInvoice} setInvoice={setEditInvoice} />
 				<div className='ButtonGroup'>
 					<Button3>Cancel</Button3>
 					<Button2>Save Changes</Button2>

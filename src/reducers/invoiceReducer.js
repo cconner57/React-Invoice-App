@@ -8,6 +8,9 @@ import {
 	INVOICE_DELETE_REQUEST,
 	INVOICE_DELETE_SUCCESS,
 	INVOICE_DELETE_FAIL,
+	INVOICE_NEW_REQUEST,
+	INVOICE_NEW_SUCCESS,
+	INVOICE_NEW_FAIL,
 	INVOICE_CREATE_REQUEST,
 	INVOICE_CREATE_SUCCESS,
 	INVOICE_CREATE_FAIL,
@@ -35,7 +38,7 @@ export const invoiceListReducer = (state = { invoices: [] }, action) => {
 export const listInvoiceDetailsReducer = (state = { invoice: {} }, action) => {
 	switch (action.type) {
 		case INVOICE_DETAILS_REQUEST:
-			return { loading: true, ...state };
+			return { loading: true };
 		case INVOICE_DETAILS_SUCCESS:
 			return { loading: false, invoice: action.payload };
 		case INVOICE_DETAILS_FAIL:
@@ -52,6 +55,19 @@ export const invoiceDeleteReducer = (state = {}, action) => {
 		case INVOICE_DELETE_SUCCESS:
 			return { loading: false, success: true };
 		case INVOICE_DELETE_FAIL:
+			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const invoiceNewReducer = (state = {}, action) => {
+	switch (action.type) {
+		case INVOICE_NEW_REQUEST:
+			return { loading: true };
+		case INVOICE_NEW_SUCCESS:
+			return { loading: false, invoice: action.payload };
+		case INVOICE_NEW_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;

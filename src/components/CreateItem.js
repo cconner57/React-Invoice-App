@@ -1,21 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Loader from './Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { newInvoice, createInvoice } from '../actions/invoiceActions';
 import styled from 'styled-components';
-import { H2Alt, Button2, Button3, Button4 } from '../Styles';
+import { H2Alt, Button2, Button3, Button4, Warning } from '../Styles';
 
 import InputForm from './InputForm';
 
 const CreateItem = () => {
+	const [createInvoice, setCreateInvoice] = useState({});
+
+	const dispatch = useDispatch();
+
+	const invoiceState = useSelector((state) => state.invoiceNew);
+	const { loading, error, invoice } = invoiceState;
+
+	const formHandler = (e) => {
+		e.preventDefault();
+		console.log(e);
+		// dispatch(createInvoice(createInvoice));
+	};
+
+	useEffect(() => {
+		dispatch(newInvoice());
+	}, [dispatch]);
+
 	return (
 		<Container>
 			<H2Alt className='Title'>New Invoice</H2Alt>
-			<form onSubmit={(e) => e.preventDefault()}>
-				<InputForm />
-				<div className='ButtonGroup'>
-					<Button3>Discard</Button3>
-					<Button4>Save as Draft</Button4>
-					<Button2>Save & Send</Button2>
-				</div>
-			</form>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Warning>{error}</Warning>
+			) : (
+				<form onSubmit={formHandler}>
+					<InputForm invoice={invoice} setInvoice={setCreateInvoice} />
+					<div className='ButtonGroup'>
+						<Button3>Discard</Button3>
+						<Button4>Save as Draft</Button4>
+						<Button2>Save & Send</Button2>
+					</div>
+				</form>
+			)}
 		</Container>
 	);
 };

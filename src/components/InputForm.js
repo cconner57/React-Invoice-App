@@ -2,22 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { H3Alt, Body1, Button6, Warning } from '../Styles';
 
-import ListItem from './ListItem';
+import ListItem from './FormItem';
 
-const InputForm = ({ invoice }) => {
+const InputForm = ({ invoice, setInvoice }) => {
 	const [error, setError] = useState(false);
 
-	const {
-		clientAddress,
-		clientEmail,
-		clientName,
-		description,
-		items,
-		paymentDue,
-		paymentTerms,
-		total,
-		senderAddress,
-	} = invoice;
+	const onChangeHandler = () => {};
 
 	return (
 		<Container>
@@ -28,23 +18,28 @@ const InputForm = ({ invoice }) => {
 					type='text'
 					name='street'
 					id='street'
-					value={senderAddress.street}
+					value={invoice?.senderAddress.street}
 				/>
 				<label htmlFor='city'>City</label>
-				<input type='text' name='city' id='city' value={senderAddress.city} />
+				<input
+					type='text'
+					name='city'
+					id='city'
+					value={invoice?.senderAddress.city}
+				/>
 				<label htmlFor='postalCode'>Post Code</label>
 				<input
 					type='text'
 					name='postalCode'
 					id='postalCode'
-					value={senderAddress.postCode}
+					value={invoice?.senderAddress.postCode}
 				/>
 				<label htmlFor='country'>Country</label>
 				<input
 					type='text'
 					name='country'
 					id='country'
-					value={senderAddress.country}
+					value={invoice?.senderAddress.country}
 				/>
 			</div>
 			<div className='BillTo'>
@@ -54,14 +49,14 @@ const InputForm = ({ invoice }) => {
 					type='text'
 					name='clientName'
 					id='clientName'
-					value={clientName}
+					value={invoice?.clientName}
 				/>
 				<label htmlFor='clientEmail'>Client's Email</label>
 				<input
 					type='text'
 					name='clientEmail'
 					id='clientEmail'
-					value={clientEmail}
+					value={invoice?.clientEmail}
 					placeholder='e.g. email@example.com'
 				/>
 				<label htmlFor='clientStreet'>Street Address</label>
@@ -69,28 +64,28 @@ const InputForm = ({ invoice }) => {
 					type='text'
 					name='clientStreet'
 					id='clientStreet'
-					value={clientAddress.street}
+					value={invoice?.clientAddress.street}
 				/>
 				<label htmlFor='clientCity'>City</label>
 				<input
 					type='text'
 					name='clientCity'
 					id='clientCity'
-					value={clientAddress.city}
+					value={invoice?.clientAddress.city}
 				/>
 				<label htmlFor='clientPostCode'>Post Code</label>
 				<input
 					type='text'
 					name='clientPostCode'
 					id='clientPostCode'
-					value={clientAddress.postCode}
+					value={invoice?.clientAddress.postCode}
 				/>
 				<label htmlFor='clientCountry'>Country</label>
 				<input
 					type='text'
 					name='clientCountry'
 					id='clientCountry'
-					value={clientAddress.country}
+					value={invoice?.clientAddress.country}
 				/>
 			</div>
 			<div className='InvoiceDetail'>
@@ -99,10 +94,10 @@ const InputForm = ({ invoice }) => {
 					type='date'
 					name='invoiceDate'
 					id='invoiceDate'
-					value={paymentDue}
+					value={invoice?.paymentDue}
 				/>
 				<label htmlFor='paymentTerms'>Payment Terms</label>
-				<select name='paymentTerms' id='paymentTerms' value={paymentTerms}>
+				<select name='paymentTerms' id='paymentTerms' value={invoice?.paymentTerms}>
 					<option value='1'>Net 1 Day</option>
 					<option value='7'>Net 7 Day</option>
 					<option value='14'>Net 14 Day</option>
@@ -113,7 +108,7 @@ const InputForm = ({ invoice }) => {
 					type='text'
 					name='description'
 					id='description'
-					value={description}
+					value={invoice?.description}
 					placeholder='e.g. Graphic Design Service'
 				/>
 			</div>
@@ -125,8 +120,8 @@ const InputForm = ({ invoice }) => {
 					<Body1>Price</Body1>
 					<Body1>Total</Body1>
 				</div>
-				{items.map((item, key) => (
-					<ListItem key={key} item={item} total={total} />
+				{invoice?.items?.map((item, key) => (
+					<ListItem key={key} item={item} total={invoice?.total} />
 				))}
 				<Button6>+ Add New Item</Button6>
 			</div>

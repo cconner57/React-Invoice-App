@@ -5,6 +5,7 @@ import {
 	invoiceListReducer,
 	listInvoiceDetailsReducer,
 	invoiceDeleteReducer,
+	invoiceNewReducer,
 	invoiceCreateReducer,
 	invoiceUpdateReducer,
 } from './reducers/invoiceReducer';
@@ -20,6 +21,7 @@ const reducer = combineReducers({
 	invoiceList: invoiceListReducer,
 	listInvoiceDetails: listInvoiceDetailsReducer,
 	invoiceDelete: invoiceDeleteReducer,
+	invoiceNew: invoiceNewReducer,
 	invoiceCreate: invoiceCreateReducer,
 	invoiceUpdate: invoiceUpdateReducer,
 });

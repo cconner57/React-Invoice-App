@@ -70,7 +70,7 @@ const Spinner = styled.div`
 		content: '';
 	}
 	&:after {
-		background: hsl(120, 3%, 94%);
+		background: ${colors.white};
 		width: 75%;
 		height: 75%;
 		border-radius: 50%;
