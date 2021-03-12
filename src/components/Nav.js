@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { themeChange } from '../actions/themeActions';
 import styled from 'styled-components';
 import { colors } from '../Styles';
 
@@ -7,7 +9,10 @@ import { ReactComponent as Moon } from '../images/icon-moon.svg';
 import { ReactComponent as Sun } from '../images/icon-sun.svg';
 
 const Nav = () => {
-	const [darkMode, setDarkMode] = useState(false);
+	const dispatch = useDispatch();
+
+	const darkMode = useSelector((state) => state.themeChange);
+	const { theme } = darkMode;
 
 	return (
 		<NavContainer>
@@ -15,10 +20,10 @@ const Nav = () => {
 				<img src={Logo} alt='Logo' />
 			</div>
 			<div className='Settings'>
-				{darkMode ? (
-					<Sun onClick={() => setDarkMode(false)} />
+				{theme ? (
+					<Sun onClick={() => dispatch(themeChange())} />
 				) : (
-					<Moon onClick={() => setDarkMode(true)} />
+					<Moon onClick={() => dispatch(themeChange())} />
 				)}
 				<hr />
 				<img
@@ -36,6 +41,7 @@ const NavContainer = styled.nav`
 	height: 100vh;
 	width: 103px;
 	display: flex;
+	position: fixed;
 	flex-direction: column;
 	justify-content: space-between;
 	border-radius: 0px 20px 20px 0px;

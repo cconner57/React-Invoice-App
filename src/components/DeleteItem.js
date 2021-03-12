@@ -1,8 +1,15 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { H2Alt, Body1, Button3, Button5, lightColors } from '../Styles';
+import {
+	H2Alt,
+	Body1,
+	Button3,
+	Button5,
+	lightColors,
+	darkColors,
+} from '../Styles';
 
-const DeleteItem = ({ setToggleModal }) => {
+const DeleteItem = ({ setToggleModal, history, colortheme }) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			const outsideForm = document.querySelector('.Modal');
@@ -10,6 +17,10 @@ const DeleteItem = ({ setToggleModal }) => {
 		},
 		[setToggleModal]
 	);
+
+	const onDeleteHandler = () => {
+		history.push('/');
+	};
 
 	useEffect(() => {
 		window.addEventListener('click', handleOutsideClick);
@@ -19,7 +30,7 @@ const DeleteItem = ({ setToggleModal }) => {
 	}, [handleOutsideClick]);
 
 	return (
-		<Container className='Modal'>
+		<Container className='Modal' colortheme={colortheme}>
 			<div className='Delete'>
 				<H2Alt>Confirm Deletion</H2Alt>
 				<Body1>
@@ -27,8 +38,12 @@ const DeleteItem = ({ setToggleModal }) => {
 					undone.
 				</Body1>
 				<div className='Buttons'>
-					<Button3 onClick={() => setToggleModal(false)}>Cancel</Button3>
-					<Button5>Delete</Button5>
+					<Button3
+						colortheme={colortheme}
+						onClick={() => setToggleModal(false)}>
+						Cancel
+					</Button3>
+					<Button5 onClick={onDeleteHandler}>Delete</Button5>
 				</div>
 			</div>
 		</Container>
@@ -41,9 +56,9 @@ const Container = styled.div`
 	height: 100vh;
 	width: 100vw;
 	position: absolute;
-	top: 0;
-	left: -407px;
 	z-index: 5;
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 	background-color: hsla(210, 3%, 40%, 0.6);
 	.Delete {
 		height: 249px;
@@ -53,19 +68,25 @@ const Container = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		background-color: hsl(0, 0%, 100%);
+		background-color: ${({ colortheme }) =>
+			colortheme
+				? `${darkColors.altBackground}`
+				: `${lightColors.accentBackground}`};
 		border-radius: 8px;
 		z-index: 10;
 		h2 {
 			user-select: none;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 		}
 		p {
 			height: 44px;
-			width: 320px;
+			width: 280px;
 			margin: 13px 0 16px;
 			line-height: 22px;
-			color: ${lightColors.text};
 			user-select: none;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 		}
 		.Buttons {
 			display: flex;

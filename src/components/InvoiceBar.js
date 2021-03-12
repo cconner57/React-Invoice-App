@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { H1, Body1, Button1, H3Alt, colors } from '../Styles';
+import {
+	lightColors,
+	darkColors,
+	H1,
+	Body1,
+	Button1,
+	H3Alt,
+	colors,
+} from '../Styles';
 
 import MenuModal from '../components/MenuModal';
 import FilterInvoices from '../components/FilterInvoices';
@@ -9,12 +17,12 @@ import CreateItem from '../components/CreateItem';
 import Arrow from '../images/icon-arrow-down.svg';
 import Plus from '../images/icon-plus.svg';
 
-const InvoiceBar = ({ total, filter, setFilter }) => {
+const InvoiceBar = ({ colortheme, total, filter, setFilter }) => {
 	const [toggleFilter, setToggleFilter] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
 	return (
-		<Container>
+		<Container colortheme={colortheme}>
 			<div>
 				<H1>Invoices</H1>
 				<Body1>
@@ -30,7 +38,7 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 					invoices
 				</Body1>
 			</div>
-			<Options>
+			<Options colortheme={colortheme}>
 				<Body1 onClick={() => setToggleFilter(!toggleFilter)}>
 					Filter by status <img src={Arrow} alt='arrow down' />
 				</Body1>
@@ -39,6 +47,7 @@ const InvoiceBar = ({ total, filter, setFilter }) => {
 						setToggleFilter={setToggleFilter}
 						filter={filter}
 						setFilter={setFilter}
+						colortheme={colortheme}
 					/>
 				)}
 				<Button1 onClick={() => setToggleMenu(!toggleMenu)}>
@@ -64,10 +73,15 @@ const Container = styled.div`
 	z-index: 0;
 	display: flex;
 	justify-content: space-between;
+	h1 {
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.text}` : `${lightColors.text}`};
+	}
 	h1 + p {
 		padding-top: 2px;
 		font-size: 0.9rem;
-		color: ${colors.accent};
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 	}
 `;
 
@@ -76,7 +90,8 @@ const Options = styled.div`
 	align-items: center;
 	position: relative;
 	p {
-		color: ${colors.darkText};
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 		font-weight: 700;
 		user-select: none;
 		cursor: pointer;

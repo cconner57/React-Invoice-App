@@ -13,7 +13,8 @@ const InputForm = ({ invoice, setInvoice }) => {
 		const { name, value, dataset } = e.target;
 		if (dataset.address === 'senderAddress') {
 			return setSenderAddress({ ...senderAddress, [name]: value });
-		} else if (dataset.address === 'clientAddress') {
+		}
+		if (dataset.address === 'clientAddress') {
 			return setClientAddress({ ...clientAddress, [name]: value });
 		}
 		setInvoice({
@@ -169,7 +170,7 @@ const InputForm = ({ invoice, setInvoice }) => {
 				))}
 				<Button6>+ Add New Item</Button6>
 			</div>
-			{error && <Warning>&#8226; All fields must be added</Warning>}
+			{/* {error && <Warning>&#8226; All fields must be added</Warning>} */}
 		</Container>
 	);
 };

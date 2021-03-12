@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { darkColors, lightColors } from '../Styles';
 
-const FilterInvoices = ({ setToggleFilter, filter, setFilter }) => {
+const FilterInvoices = ({ colorTheme, setToggleFilter, filter, setFilter }) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			if (!document.querySelector('.Checkboxes')?.contains(e.target))
@@ -18,7 +19,7 @@ const FilterInvoices = ({ setToggleFilter, filter, setFilter }) => {
 	}, [handleOutsideClick]);
 
 	return (
-		<Checkboxes className='Checkboxes'>
+		<Checkboxes className='Checkboxes' colortheme={colorTheme}>
 			<label htmlFor='draft' className='CheckboxLabel'>
 				<input
 					type='checkbox'
@@ -69,12 +70,20 @@ const Checkboxes = styled.div`
 	top: 55px;
 	left: -40px;
 	border-radius: 8px;
-	background-color: hsl(0, 0%, 100%);
-	box-shadow: 0px 10px 20px hsla(232, 37.7%, 45.3%, 0.25);
+	background-color: ${({ colortheme }) =>
+		colortheme
+			? `${darkColors.accentBackground}`
+			: `${lightColors.accentBackground}`};
+	box-shadow: ${({ colortheme }) =>
+		colortheme
+			? `0px 10px 20px hsla(232, 37.7%, 65%, 0.25)`
+			: `0px 10px 20px hsla(232, 37.7%, 45%, 0.25)`};
 	label {
 		margin-left: 24px;
 		user-select: none;
 		cursor: pointer;
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.text}` : `${lightColors.darkText}`};
 		input {
 			margin-right: 13px;
 			user-select: none;

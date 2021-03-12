@@ -22,7 +22,7 @@ import {
 export const invoiceListReducer = (state = { invoices: [] }, action) => {
 	switch (action.type) {
 		case INVOICE_LIST_REQUEST:
-			return { loading: true, ...state };
+			return { ...state, loading: true };
 		case INVOICE_LIST_SUCCESS:
 			return {
 				loading: false,

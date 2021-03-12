@@ -1,10 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { H3Alt } from '../Styles';
+import { darkColors, lightColors, colors, H3Alt } from '../Styles';
 
 const Status = ({ status }) => {
+	const colorTheme = useSelector((state) => state.themeChange);
+
 	return (
-		<Container accent={status}>
+		<Container accent={status} colortheme={colorTheme.theme}>
 			&#9679;
 			<H3Alt>{status}</H3Alt>
 		</Container>
@@ -21,26 +24,30 @@ const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 	border-radius: 6px;
-	color: ${({ accent }) =>
-			accent === 'paid'
-				? 'hsl(160,67%,52%)'
-				: accent === 'pending'
-				? 'hsl(34, 100%, 50%)'
-				: 'hsl(231,20%,27%)'};
-	background-color: ${({ accent }) =>
+	color: ${({ accent, colortheme }) =>
 		accent === 'paid'
-			? 'hsl(162, 71%, 97%)'
+			? `${colors.paidText}`
 			: accent === 'pending'
-			? 'hsl(30, 70%, 96%)'
-			: 'hsl(0,0%,59%)'};
+			? `${colors.pendingText}`
+			: colortheme
+			? `${darkColors.draftText}`
+			: `${lightColors.draftText}`};
+	background-color: ${({ accent, colortheme }) =>
+		accent === 'paid'
+			? colortheme
+				? `${darkColors.paidBackground}`
+				: `${lightColors.paidBackground}`
+			: accent === 'pending'
+			? colortheme
+				? `${darkColors.pendingBackground}`
+				: `${lightColors.pendingBackground}`
+			: accent === 'draft'
+			? colortheme
+				? `${darkColors.draftBackground}`
+				: `${lightColors.draftBackground}`
+			: undefined};
 	h3 {
 		margin-left: 8px;
 		text-transform: capitalize;
-		color: ${({ accent }) =>
-			accent === 'paid'
-				? 'hsl(160,67%,52%)'
-				: accent === 'pending'
-				? 'hsl(34, 100%, 50%)'
-				: 'hsl(231,20%,27%)'};
 	}
 `;

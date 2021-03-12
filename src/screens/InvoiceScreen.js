@@ -6,6 +6,8 @@ import Status from '../components/Status';
 import { addComma } from '../Utility.js';
 import styled from 'styled-components';
 import {
+	darkColors,
+	lightColors,
 	H2Alt,
 	H3,
 	Body1,
@@ -14,7 +16,6 @@ import {
 	Button2,
 	Button3,
 	Button5,
-	lightColors,
 	Warning,
 } from '../Styles';
 
@@ -30,6 +31,8 @@ const InvoiceScreen = ({ history, match }) => {
 
 	const dispatch = useDispatch();
 
+	const colorTheme = useSelector((state) => state.themeChange);
+
 	const invoiceDetails = useSelector((state) => state.listInvoiceDetails);
 	const { loading, error, invoice } = invoiceDetails;
 
@@ -38,7 +41,7 @@ const InvoiceScreen = ({ history, match }) => {
 	}, [dispatch, match]);
 
 	return (
-		<Container>
+		<Container colortheme={colorTheme.theme}>
 			<div className='Back' onClick={() => history.goBack()}>
 				<img src={LeftArrow} alt='Go Back' />
 				<H3>Go back</H3>
@@ -54,7 +57,7 @@ const InvoiceScreen = ({ history, match }) => {
 							<Body1>Status</Body1>
 							<Status status={invoice.status} />
 						</div>
-						<Button3 onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
+						<Button3 colortheme={colorTheme.theme} onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
 						<Button5 onClick={() => setToggleModal(!toggleModal)}>
 							Delete
 						</Button5>
@@ -126,11 +129,16 @@ const InvoiceScreen = ({ history, match }) => {
 				</>
 			)}
 			{toggleModal && (
-				<DeleteItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
+				<DeleteItem
+					toggleModal={toggleModal}
+					setToggleModal={setToggleModal}
+					history={history}
+					colortheme={colorTheme.theme}
+				/>
 			)}
 			{toggleMenu && (
 				<MenuModal setToggleMenu={setToggleMenu}>
-					<EditItem invoice={invoice} />
+					<EditItem invoice={invoice}  />
 				</MenuModal>
 			)}
 		</Container>
@@ -149,9 +157,12 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	background-color: ${({ colortheme }) =>
+		colortheme ? `${darkColors.background}` : `${lightColors.background}`};
 	.Back {
 		display: flex;
 		align-items: center;
+		margin-left: 26.5vw;
 		margin-bottom: 20px;
 		align-self: flex-start;
 		cursor: pointer;
@@ -161,6 +172,8 @@ const Container = styled.div`
 		h3 {
 			margin-left: 10px;
 			transition: color 0.25s ease;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 			&:hover {
 				color: hsl(231, 36%, 63%);
 			}
@@ -172,9 +185,15 @@ const Container = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 32px;
-		background-color: #ffffff;
-		box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+		padding: 0 2rem;
+		background-color: ${({ colortheme }) =>
+			colortheme
+				? `${darkColors.accentBackground}`
+				: `${lightColors.accentBackground}`};
+		box-shadow: ${({ colortheme }) =>
+			colortheme
+				? `0px 10px 10px -10px ${darkColors.shadow}`
+				: `0px 10px 10px -10px ${lightColors.shadow}`};
 		border-radius: 8px;
 		.Status {
 			height: 40px;
@@ -183,6 +202,8 @@ const Container = styled.div`
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 		}
 		button:nth-child(3) {
 			margin: 0 8px;
@@ -195,8 +216,14 @@ const Container = styled.div`
 		padding: 35px 48px;
 		display: flex;
 		flex-direction: column;
-		background-color: #ffffff;
-		box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+		background-color: ${({ colortheme }) =>
+			colortheme
+				? `${darkColors.accentBackground}`
+				: `${lightColors.accentBackground}`};
+		box-shadow: ${({ colortheme }) =>
+			colortheme
+				? `0px 10px 10px -10px ${darkColors.shadow}`
+				: `0px 10px 10px -10px ${lightColors.shadow}`};
 		border-radius: 8px;
 		.TopRow {
 			width: 634px;
@@ -205,16 +232,22 @@ const Container = styled.div`
 			.Description {
 				display: flex;
 				flex-direction: column;
+				h3 {
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.text}` : `${lightColors.text}`};
+				}
 				span,
 				p {
-					color: ${lightColors.text};
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 				}
 			}
 			.Sender {
 				display: flex;
 				flex-direction: column;
 				text-align: end;
-				color: ${lightColors.text};
+				color: ${({ colortheme }) =>
+					colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 			}
 		}
 		.MidRow {
@@ -225,10 +258,12 @@ const Container = styled.div`
 			.Date {
 				display: flex;
 				flex-direction: column;
-				color: ${lightColors.text};
+				color: ${({ colortheme }) =>
+					colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 				p:nth-child(even) {
 					margin-top: 12px;
-					color: ${lightColors.darkText};
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 				}
 				p:nth-child(2) {
 					margin-bottom: 32px;
@@ -237,20 +272,24 @@ const Container = styled.div`
 			.BillTo {
 				display: flex;
 				flex-direction: column;
-				color: ${lightColors.text};
+				color: ${({ colortheme }) =>
+					colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 				p:nth-child(2) {
 					margin: 12px 0 8px;
-					color: ${lightColors.darkText};
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 				}
 			}
 			.SentTo {
 				display: flex;
 				flex-direction: column;
 				margin-right: 123px;
-				color: ${lightColors.text};
+				color: ${({ colortheme }) =>
+					colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 				p:nth-child(2) {
 					margin-top: 12px;
-					color: ${lightColors.darkText};
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 				}
 			}
 		}
@@ -263,10 +302,17 @@ const Container = styled.div`
 			justify-content: space-between;
 			border-radius: 8px;
 			overflow: hidden;
-			background-color: #f9fafe;
+			background-color: ${({ colortheme }) =>
+				colortheme
+					? `${darkColors.altBackground}`
+					: `${lightColors.altBackground}`};
 			table {
 				margin: 0 32px;
 				border-spacing: 0 32px;
+				th {
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
+				}
 				th:first-child {
 					width: 250px;
 					text-align: start;
@@ -277,6 +323,8 @@ const Container = styled.div`
 				td {
 					height: 15px;
 					text-align: center;
+					color: ${({ colortheme }) =>
+						colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 				}
 				td:first-child {
 					text-align: start;
@@ -293,7 +341,10 @@ const Container = styled.div`
 				align-items: center;
 				justify-content: space-between;
 				color: hsl(0, 0%, 100%);
-				background-color: hsl(231, 20%, 27%);
+				background-color: ${({ colortheme }) =>
+					colortheme
+						? `${darkColors.secondaryBackground}`
+						: `${lightColors.secondaryBackground}`};
 			}
 		}
 	}

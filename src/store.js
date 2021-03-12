@@ -9,6 +9,7 @@ import {
 	invoiceCreateReducer,
 	invoiceUpdateReducer,
 } from './reducers/invoiceReducer';
+import { themeChangeReducer } from './reducers/themeReducer';
 // import {
 // 	userLoginReducer,
 // 	userRegisterReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
 	invoiceNew: invoiceNewReducer,
 	invoiceCreate: invoiceCreateReducer,
 	invoiceUpdate: invoiceUpdateReducer,
+	themeChange: themeChangeReducer,
 });
 
 const middleware = [thunk];

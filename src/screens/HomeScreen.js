@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listInvoices } from '../actions/invoiceActions';
 import Loader from '../components/Loader';
 import styled from 'styled-components';
-import { H2, Body1, Warning } from '../Styles';
+import { lightColors, darkColors, H2, Body1, Warning } from '../Styles';
 
 import InvoiceBar from '../components/InvoiceBar';
 import InvoiceItem from '../components/InvoiceItem';
@@ -15,6 +15,8 @@ const HomeScreen = () => {
 
 	const dispatch = useDispatch();
 
+	const darkMode = useSelector((state) => state.themeChange);
+
 	const invoiceList = useSelector((state) => state.invoiceList);
 	const { loading, error, invoices } = invoiceList;
 
@@ -23,8 +25,9 @@ const HomeScreen = () => {
 	}, [dispatch]);
 
 	return (
-		<Container>
+		<Container colortheme={darkMode.theme}>
 			<InvoiceBar
+				colortheme={darkMode.theme}
 				total={
 					filter
 						? invoices.filter((data) => data.status === filter).length
@@ -49,10 +52,22 @@ const HomeScreen = () => {
 			) : (
 				<div className='InvoiceList'>
 					{filter === undefined
-						? invoices.map((item) => <InvoiceItem key={item.id} item={item} />)
+						? invoices.map((item) => (
+								<InvoiceItem
+									key={item.id}
+									item={item}
+									colortheme={darkMode.theme}
+								/>
+						))
 						: invoices
 								.filter((data) => data.status === filter)
-								.map((item, key) => <InvoiceItem key={key} item={item} />)}
+								.map((item, key) => (
+									<InvoiceItem
+										key={key}
+										item={item}
+										colortheme={darkMode.theme}
+									/>
+								))}
 				</div>
 			)}
 		</Container>
@@ -63,21 +78,31 @@ export default HomeScreen;
 
 const Container = styled.div`
 	height: 100vh;
-	width: 92vw;
+	width: 100vw;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: ${({ colortheme }) =>
+		colortheme
+			? `${darkColors.background}`
+			: `${lightColors.background}`};
 	.EmptyInvoices {
 		height: 341px;
 		width: 242px;
+		margin-top: 5rem;
 		h2 {
 			margin: 64px 0 24px;
+			text-align: center;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.text}` : `${lightColors.darkText}`};
 		}
 		p {
-			height: 31px;
-			width: 220px;
+			width: 240px;
+			padding: 0 25px;
 			text-align: center;
+			color: ${({ colortheme }) =>
+				colortheme ? `${darkColors.text}` : `${lightColors.darkText}`};
 		}
 		span {
 			font-weight: 700;

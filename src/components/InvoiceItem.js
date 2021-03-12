@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { H3, H3Alt, Body1, colors, lightColors } from '../Styles';
+import { lightColors, darkColors, H3, H3Alt, Body1 } from '../Styles';
 import { addComma, modifyDate } from '../Utility';
 
 import Status from './Status';
 
 import rightArrow from '../images/icon-arrow-right.svg';
 
-const InvoiceItem = ({ item }) => {
+const InvoiceItem = ({ colortheme, item }) => {
 	const { id, paymentDue, clientName, total, status } = item;
 
 	return (
-		<Container to={`/${id}`}>
+		<Container to={`/${id}`} colortheme={colortheme}>
 			<H3Alt className='ID'>
 				<span>#</span>
 				{id}
@@ -37,20 +37,28 @@ const Container = styled(Link)`
 	justify-content: space-evenly;
 	border-radius: 8px;
 	text-decoration: none;
-	background-color: hsl(0, 0%, 100%);
-	box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.5);
+	background-color: ${({ colortheme }) =>
+		colortheme
+			? `${darkColors.accentBackground}`
+			: `${lightColors.accentBackground}`};
+	box-shadow: ${({ colortheme }) =>
+		colortheme
+			? `0px 10px 10px -10px ${darkColors.shadow}`
+			: `0px 10px 10px -10px ${lightColors.shadow}`};
 	&:hover {
 		border: 1px solid hsl(252, 94%, 67%);
 	}
 	.ID {
 		margin: 0 43px 0 32px;
 	}
-	h3 {
-		color: ${lightColors.darkText};
+	.ID, p + h3 {
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 	}
 	span,
 	p {
-		color: ${colors.accent};
+		color: ${({ colortheme }) =>
+			colortheme ? `${darkColors.altText}` : `${lightColors.altText}`};
 	}
 	p + p {
 		width: 150px;
