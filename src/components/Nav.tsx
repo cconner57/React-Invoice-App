@@ -8,11 +8,17 @@ import Logo from '../images/logo.svg';
 import { ReactComponent as Moon } from '../images/icon-moon.svg';
 import { ReactComponent as Sun } from '../images/icon-sun.svg';
 
+interface ColorProps {
+	themeChange: {
+		theme: boolean;
+	};
+}
+
 const Nav = () => {
 	const dispatch = useDispatch();
 
-	const darkMode = useSelector((state) => state.themeChange);
-	const { theme } = darkMode;
+	const colortheme = useSelector((state: ColorProps) => state.themeChange);
+	const { theme } = colortheme;
 
 	return (
 		<NavContainer>
@@ -92,7 +98,7 @@ const NavContainer = styled.nav`
 		hr {
 			height: 1px;
 			width: 100%;
-			background-color: ${colors.accent};
+			/* background-color: ${colors.accent}; */
 		}
 		img:last-child {
 			width: 40px;

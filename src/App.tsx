@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import HomeScreen from './screens/HomeScreen';
 import InvoiceScreen from './screens/InvoiceScreen';
 
-function App() {
+const App = () => {
 	return (
 		<Router>
 			<ScrollToTop />
@@ -19,6 +19,6 @@ function App() {
 			<GlobalStyle />
 		</Router>
 	);
-}
+};
 
 export default App;

@@ -2,7 +2,23 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { darkColors, lightColors } from '../Styles';
 
-const FilterInvoices = ({ colorTheme, setToggleFilter, filter, setFilter }) => {
+interface FilterProps {
+	colorTheme: boolean;
+	setToggleFilter: Function;
+	filter: string;
+	setFilter: Function;
+}
+
+interface ThemeProps {
+	colortheme: boolean;
+}
+
+const FilterInvoices = ({
+	colorTheme,
+	setToggleFilter,
+	filter,
+	setFilter,
+}: FilterProps) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			if (!document.querySelector('.Checkboxes')?.contains(e.target))
@@ -59,7 +75,7 @@ const FilterInvoices = ({ colorTheme, setToggleFilter, filter, setFilter }) => {
 
 export default FilterInvoices;
 
-const Checkboxes = styled.div`
+const Checkboxes = styled.div<ThemeProps>`
 	height: 128px;
 	width: 192px;
 	padding: 20px 0;

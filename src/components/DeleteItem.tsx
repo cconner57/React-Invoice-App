@@ -9,7 +9,19 @@ import {
 	darkColors,
 } from '../Styles';
 
-const DeleteItem = ({ setToggleModal, history, colortheme }) => {
+interface Props {
+	setToggleModal: Function;
+	history: {
+		push: Function;
+	}
+	colortheme: boolean;
+}
+
+interface ThemeProps {
+	colortheme: boolean;
+}
+
+const DeleteItem = ({ setToggleModal, history, colortheme }: Props) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			const outsideForm = document.querySelector('.Modal');
@@ -52,7 +64,7 @@ const DeleteItem = ({ setToggleModal, history, colortheme }) => {
 
 export default DeleteItem;
 
-const Container = styled.div`
+const Container = styled.div<ThemeProps>`
 	height: 100vh;
 	width: 100vw;
 	position: absolute;

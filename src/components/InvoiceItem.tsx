@@ -8,7 +8,22 @@ import Status from './Status';
 
 import rightArrow from '../images/icon-arrow-right.svg';
 
-const InvoiceItem = ({ colortheme, item }) => {
+interface ItemProps {
+	colortheme: boolean;
+	item: {
+		id: string;
+		paymentDue: string;
+		clientName: string;
+		total: number;
+		status: string;
+	};
+}
+
+interface ThemeProps {
+	colortheme: boolean;
+}
+
+const InvoiceItem = ({ colortheme, item }: ItemProps) => {
 	const { id, paymentDue, clientName, total, status } = item;
 
 	return (
@@ -28,7 +43,7 @@ const InvoiceItem = ({ colortheme, item }) => {
 
 export default InvoiceItem;
 
-const Container = styled(Link)`
+const Container = styled(Link)<ThemeProps>`
 	min-height: 72px;
 	max-width: 730px;
 	margin-bottom: 16px;
@@ -51,7 +66,8 @@ const Container = styled(Link)`
 	.ID {
 		margin: 0 43px 0 32px;
 	}
-	.ID, p + h3 {
+	.ID,
+	p + h3 {
 		color: ${({ colortheme }) =>
 			colortheme ? `${darkColors.text}` : `${lightColors.text}`};
 	}

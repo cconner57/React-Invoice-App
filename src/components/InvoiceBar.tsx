@@ -10,14 +10,30 @@ import {
 	colors,
 } from '../Styles';
 
-import MenuModal from '../components/MenuModal';
-import FilterInvoices from '../components/FilterInvoices';
-import CreateItem from '../components/CreateItem';
+import MenuModal from './MenuModal';
+import FilterInvoices from './FilterInvoices';
+import CreateItem from './CreateItem';
 
 import Arrow from '../images/icon-arrow-down.svg';
 import Plus from '../images/icon-plus.svg';
 
-const InvoiceBar = ({ colortheme, total, filter, setFilter }) => {
+interface InvoiceBarProps {
+	colortheme: boolean;
+	total: number;
+	filter: string;
+	setFilter: Function;
+}
+
+interface ThemeProps {
+	colortheme: boolean;
+}
+
+const InvoiceBar = ({
+	colortheme,
+	total,
+	filter,
+	setFilter,
+}: InvoiceBarProps) => {
 	const [toggleFilter, setToggleFilter] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -47,7 +63,7 @@ const InvoiceBar = ({ colortheme, total, filter, setFilter }) => {
 						setToggleFilter={setToggleFilter}
 						filter={filter}
 						setFilter={setFilter}
-						colortheme={colortheme}
+						colorTheme={colortheme}
 					/>
 				)}
 				<Button1 onClick={() => setToggleMenu(!toggleMenu)}>
@@ -66,7 +82,7 @@ const InvoiceBar = ({ colortheme, total, filter, setFilter }) => {
 
 export default InvoiceBar;
 
-const Container = styled.div`
+const Container = styled.div<ThemeProps>`
 	width: 730px;
 	margin: 72px 0 3rem;
 	display: relative;
@@ -85,7 +101,7 @@ const Container = styled.div`
 	}
 `;
 
-const Options = styled.div`
+const Options = styled.div<ThemeProps>`
 	display: flex;
 	align-items: center;
 	position: relative;

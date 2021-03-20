@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const colors = {
+interface Colors {
+	[key: string]: string;
+}
+
+export const colors: Colors = {
 	white: 'hsl(0,0%,100%)',
 	red: 'hsl(0,80%,63%)',
 	pink: 'hsl(0,100%,80%)',
@@ -11,7 +15,7 @@ export const colors = {
 	altBackground: 'hsl(231, 20%, 27%)',
 };
 
-export const lightColors = {
+export const lightColors: Colors = {
 	text: 'hsl(231, 28%, 7%)',
 	altText: 'hsl(231, 20%, 61%)',
 	background: 'hsl(248, 27%, 98%)',
@@ -31,7 +35,7 @@ export const lightColors = {
 	shadow: 'hsla(232, 38%, 35%, 0.8)',
 };
 
-export const darkColors = {
+export const darkColors: Colors = {
 	text: 'hsl(0,0%,100%)',
 	altText: 'hsl(231, 75%, 93%)',
 	background: 'hsl(231, 30%, 11%)',
@@ -50,6 +54,10 @@ export const darkColors = {
 	accent: 'hsl(231,75%,93%)',
 	shadow: 'hsla(232, 38%, 75%, 0.8)',
 };
+
+interface ThemeProps {
+	colortheme: boolean;
+}
 
 export const Button1 = styled.button`
 	height: 48px;
@@ -74,7 +82,7 @@ export const Button2 = styled.button`
 	}
 `;
 
-export const Button3 = styled.button`
+export const Button3 = styled.button<ThemeProps>`
 	height: 48px;
 	width: auto;
 	padding: 0 24px;
@@ -89,16 +97,17 @@ export const Button3 = styled.button`
 	}
 `;
 
-export const Button4 = styled.button`
+export const Button4 = styled.button<ThemeProps>`
 	height: 48px;
 	width: auto;
 	padding: 0 24px;
-	color: ${({ darkMode }) => (darkMode ? darkColors.text : colors.accent)};
+	/* color: ${({ colortheme }) =>
+		colortheme ? darkColors.text : colors.accent}; */
 	background-color: hsl(231, 20%, 27%);
 	transition: background-color 0.25s ease;
 	&:hover {
-		background-color: ${({ darkMode }) =>
-			darkMode ? darkColors.btn4Background : lightColors.darkText};
+		background-color: ${({ colortheme }) =>
+			colortheme ? darkColors.btn4Background : lightColors.altText};
 	}
 `;
 
@@ -116,7 +125,7 @@ export const Button5 = styled.button`
 export const Button6 = styled.button`
 	height: 48px;
 	width: 100%;
-	color: ${lightColors.hoverText};
+	/* color: ${lightColors.hoverText}; */
 	background-color: ${lightColors.background};
 	transition: background-color 0.25s ease;
 	&:hover {
@@ -201,7 +210,7 @@ export const Warning = styled.p`
 	font-size: 0.9rem;
 	line-height: 15px;
 	letter-spacing: -0.21px;
-	color: hsl(0, 0%, 100%);
+	color: ${colors.white};
 	padding: 0.75rem 1.75rem;
 	font-family: 'Poppins', sans-serif;
 	border-radius: 10px;

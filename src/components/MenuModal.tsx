@@ -1,8 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
+import { colors } from '../Styles';
 
-const MenuModal = ({ children, setToggleMenu }) => {
+interface MenuProps {
+	children: object;
+	setToggleMenu: Function;
+}
+
+const MenuModal = ({ children, setToggleMenu }: MenuProps) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			if (!document.querySelector('.Modal').contains(e.target))
@@ -45,7 +51,7 @@ const Container = styled.div`
 		top: 0;
 		left: 0;
 		z-index: 5;
-		background-color: hsl(0, 0%, 100%);
+		background-color: ${colors.white};
 		border-radius: 0 8px 8px 0;
 	}
 `;
