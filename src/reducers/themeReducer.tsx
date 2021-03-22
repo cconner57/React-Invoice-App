@@ -4,7 +4,15 @@ import {
 	THEME_CHANGE_FAIL,
 } from '../constants/themeConstants';
 
-export const themeChangeReducer = (state = { theme: false }, action) => {
+interface Reducer {
+	type: string;
+	payload: object;
+}
+
+export const themeChangeReducer = (
+	state = { theme: false },
+	action: Reducer
+) => {
 	switch (action.type) {
 		case THEME_CHANGE_REQUEST:
 			return { ...state, loading: true };

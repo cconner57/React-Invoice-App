@@ -19,7 +19,15 @@ import {
 	INVOICE_UPDATE_FAIL,
 } from '../constants/invoiceConstants';
 
-export const invoiceListReducer = (state = { invoices: [] }, action) => {
+interface Reducer {
+	type: string;
+	payload: object;
+}
+
+export const invoiceListReducer = (
+	state = { invoices: [] },
+	action: Reducer
+) => {
 	switch (action.type) {
 		case INVOICE_LIST_REQUEST:
 			return { ...state, loading: true };
@@ -35,7 +43,10 @@ export const invoiceListReducer = (state = { invoices: [] }, action) => {
 	}
 };
 
-export const listInvoiceDetailsReducer = (state = { invoice: {} }, action) => {
+export const listInvoiceDetailsReducer = (
+	state = { invoice: {} },
+	action: Reducer
+) => {
 	switch (action.type) {
 		case INVOICE_DETAILS_REQUEST:
 			return { loading: true };
@@ -48,7 +59,7 @@ export const listInvoiceDetailsReducer = (state = { invoice: {} }, action) => {
 	}
 };
 
-export const invoiceDeleteReducer = (state = {}, action) => {
+export const invoiceDeleteReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case INVOICE_DELETE_REQUEST:
 			return { loading: true };
@@ -61,7 +72,7 @@ export const invoiceDeleteReducer = (state = {}, action) => {
 	}
 };
 
-export const invoiceNewReducer = (state = {}, action) => {
+export const invoiceNewReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case INVOICE_NEW_REQUEST:
 			return { loading: true };
@@ -74,7 +85,7 @@ export const invoiceNewReducer = (state = {}, action) => {
 	}
 };
 
-export const invoiceCreateReducer = (state = {}, action) => {
+export const invoiceCreateReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case INVOICE_CREATE_REQUEST:
 			return { loading: true };
@@ -87,7 +98,10 @@ export const invoiceCreateReducer = (state = {}, action) => {
 	}
 };
 
-export const invoiceUpdateReducer = (state = { invoice: {} }, action) => {
+export const invoiceUpdateReducer = (
+	state = { invoice: {} },
+	action: Reducer
+) => {
 	switch (action.type) {
 		case INVOICE_UPDATE_REQUEST:
 			return { loading: true };

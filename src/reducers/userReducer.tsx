@@ -20,7 +20,12 @@ import {
 	USER_UPDATE_PROFILE_RESET,
 } from '../constants/userConstants';
 
-export const userLoginReducer = (state = {}, action) => {
+interface Reducer {
+	type: string;
+	payload: object;
+}
+
+export const userLoginReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case USER_LOGIN_REQUEST:
 			return { loading: true };
@@ -35,7 +40,7 @@ export const userLoginReducer = (state = {}, action) => {
 	}
 };
 
-export const userRegisterReducer = (state = {}, action) => {
+export const userRegisterReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case USER_REGISTER_REQUEST:
 			return { loading: true };
@@ -50,7 +55,7 @@ export const userRegisterReducer = (state = {}, action) => {
 	}
 };
 
-export const userDetailsReducer = (state = { user: {} }, action) => {
+export const userDetailsReducer = (state = { user: {} }, action: Reducer) => {
 	switch (action.type) {
 		case USER_DETAILS_REQUEST:
 			return { ...state, loading: true };
@@ -65,7 +70,7 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
 	}
 };
 
-export const userUpdateProfileReducer = (state = {}, action) => {
+export const userUpdateProfileReducer = (state = {}, action: Reducer) => {
 	switch (action.type) {
 		case USER_UPDATE_PROFILE_REQUEST:
 			return { loading: true };
@@ -80,7 +85,7 @@ export const userUpdateProfileReducer = (state = {}, action) => {
 	}
 };
 
-export const userUpdateReducer = (state = { user: {} }, action) => {
+export const userUpdateReducer = (state = { user: {} }, action: Reducer) => {
 	switch (action.type) {
 		case USER_UPDATE_REQUEST:
 			return { loading: true };

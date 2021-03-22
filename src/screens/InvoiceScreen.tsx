@@ -18,22 +18,41 @@ import {
 	Button5,
 	Warning,
 } from '../Styles';
+import { ThemeProps, Invoice } from '../Interfaces';
 
 import DeleteItem from '../components/DeleteItem';
 import MenuModal from '../components/MenuModal';
 import EditItem from '../components/EditItem';
 
-import LeftArrow from '../images/icon-arrow-left.svg';
+const LeftArrow = require('../images/icon-arrow-left.svg') as string;
 
-const InvoiceScreen = ({ history, match }) => {
+interface Router {
+	history: {
+		goBack: Function;
+		push: Function;
+	};
+	match: { params: { id: string } };
+}
+
+const InvoiceScreen = ({ history, match }: Router) => {
 	const [toggleModal, setToggleModal] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
 	const dispatch = useDispatch();
 
-	const colorTheme = useSelector((state) => state.themeChange);
+	const colorTheme = useSelector(
+		(state: { themeChange: { theme: boolean } }) => state.themeChange
+	);
 
-	const invoiceDetails = useSelector((state) => state.listInvoiceDetails);
+	const invoiceDetails = useSelector(
+		(state: {
+			listInvoiceDetails: {
+				loading: string;
+				error: string;
+				invoice: Invoice;
+			};
+		}) => state.listInvoiceDetails
+	);
 	const { loading, error, invoice } = invoiceDetails;
 
 	useEffect(() => {
@@ -57,7 +76,11 @@ const InvoiceScreen = ({ history, match }) => {
 							<Body1>Status</Body1>
 							<Status status={invoice.status} />
 						</div>
-						<Button3 colortheme={colorTheme.theme} onClick={() => setToggleMenu(!toggleMenu)}>Edit</Button3>
+						<Button3
+							colortheme={colorTheme.theme}
+							onClick={() => setToggleMenu(!toggleMenu)}>
+							Edit
+						</Button3>
 						<Button5 onClick={() => setToggleModal(!toggleModal)}>
 							Delete
 						</Button5>
@@ -130,7 +153,6 @@ const InvoiceScreen = ({ history, match }) => {
 			)}
 			{toggleModal && (
 				<DeleteItem
-					toggleModal={toggleModal}
 					setToggleModal={setToggleModal}
 					history={history}
 					colortheme={colorTheme.theme}
@@ -138,7 +160,7 @@ const InvoiceScreen = ({ history, match }) => {
 			)}
 			{toggleMenu && (
 				<MenuModal setToggleMenu={setToggleMenu}>
-					<EditItem invoice={invoice}  />
+					<EditItem invoice={invoice} />
 				</MenuModal>
 			)}
 		</Container>
@@ -147,7 +169,7 @@ const InvoiceScreen = ({ history, match }) => {
 
 export default InvoiceScreen;
 
-const Container = styled.div`
+const Container = styled.div<ThemeProps>`
 	height: 100vh;
 	width: auto;
 	margin: 0 auto;

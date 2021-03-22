@@ -11,7 +11,7 @@ interface MenuProps {
 const MenuModal = ({ children, setToggleMenu }: MenuProps) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
-			if (!document.querySelector('.Modal').contains(e.target))
+			if (!document.querySelector('.Modal')!.contains(e.target))
 				setToggleMenu(false);
 		},
 		[setToggleMenu]
@@ -28,7 +28,7 @@ const MenuModal = ({ children, setToggleMenu }: MenuProps) => {
 		<Container className='ModalContainer'>
 			<div className='Modal'>{children}</div>
 		</Container>,
-		document.getElementById('menu')
+		document.getElementById('menu')!
 	);
 };
 

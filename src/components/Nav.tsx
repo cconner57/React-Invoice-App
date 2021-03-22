@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeChange } from '../actions/themeActions';
 import styled from 'styled-components';
 import { colors } from '../Styles';
 
-import Logo from '../images/logo.svg';
-import { ReactComponent as Moon } from '../images/icon-moon.svg';
-import { ReactComponent as Sun } from '../images/icon-sun.svg';
+const Logo = require('../images/logo.svg') as string;
+const Moon = require('../images/icon-moon.svg') as string;
+const Sun = require('../images/icon-sun.svg') as string;
 
 interface ColorProps {
 	themeChange: {
@@ -27,9 +27,9 @@ const Nav = () => {
 			</div>
 			<div className='Settings'>
 				{theme ? (
-					<Sun onClick={() => dispatch(themeChange())} />
+					<img src={Sun} alt='Sun' onClick={() => dispatch(themeChange())} />
 				) : (
-					<Moon onClick={() => dispatch(themeChange())} />
+					<img src={Moon} alt='Moon' onClick={() => dispatch(themeChange())} />
 				)}
 				<hr />
 				<img

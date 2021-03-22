@@ -21,7 +21,7 @@ import {
 	INVOICE_UPDATE_FAIL,
 } from '../constants/invoiceConstants';
 
-export const listInvoices = () => async (dispatch) => {
+export const listInvoices = () => async (dispatch: Function) => {
 	try {
 		dispatch({ type: INVOICE_LIST_REQUEST });
 
@@ -43,7 +43,7 @@ export const listInvoices = () => async (dispatch) => {
 	}
 };
 
-export const listInvoiceDetails = (id) => async (dispatch) => {
+export const listInvoiceDetails = (id: string) => async (dispatch: Function) => {
 	try {
 		dispatch({ type: INVOICE_DETAILS_REQUEST });
 
@@ -65,7 +65,7 @@ export const listInvoiceDetails = (id) => async (dispatch) => {
 	}
 };
 
-export const deleteInvoice = (id) => async (dispatch) => {
+export const deleteInvoice = (id: string) => async (dispatch: Function) => {
 	try {
 		dispatch({
 			type: INVOICE_DELETE_REQUEST,
@@ -88,7 +88,7 @@ export const deleteInvoice = (id) => async (dispatch) => {
 	}
 };
 
-export const newInvoice = () => (dispatch) => {
+export const newInvoice = () => (dispatch: Function) => {
 	try {
 		dispatch({
 			type: INVOICE_NEW_REQUEST,
@@ -135,7 +135,7 @@ export const newInvoice = () => (dispatch) => {
 	}
 };
 
-export const createInvoice = () => async (dispatch) => {
+export const createInvoice = () => async (dispatch: Function) => {
 	try {
 		dispatch({
 			type: INVOICE_CREATE_REQUEST,
@@ -159,7 +159,7 @@ export const createInvoice = () => async (dispatch) => {
 	}
 };
 
-export const updateInvoice = (invoice) => async (dispatch) => {
+export const updateInvoice = (invoice: object) => async (dispatch: Function) => {
 	try {
 		dispatch({
 			type: INVOICE_UPDATE_REQUEST,

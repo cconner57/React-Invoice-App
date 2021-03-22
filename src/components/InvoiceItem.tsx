@@ -3,27 +3,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightColors, darkColors, H3, H3Alt, Body1 } from '../Styles';
 import { addComma, modifyDate } from '../Utility';
+import { ThemeProps, ItemProps } from '../Interfaces';
 
 import Status from './Status';
 
-import rightArrow from '../images/icon-arrow-right.svg';
+const rightArrow = require('../images/icon-arrow-right.svg') as string;
 
-interface ItemProps {
-	colortheme: boolean;
-	item: {
-		id: string;
-		paymentDue: string;
-		clientName: string;
-		total: number;
-		status: string;
-	};
-}
-
-interface ThemeProps {
-	colortheme: boolean;
-}
-
-const InvoiceItem = ({ colortheme, item }: ItemProps) => {
+const InvoiceItem = ({ item, colortheme }: ItemProps & ThemeProps) => {
 	const { id, paymentDue, clientName, total, status } = item;
 
 	return (

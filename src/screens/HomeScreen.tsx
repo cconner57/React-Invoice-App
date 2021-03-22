@@ -4,20 +4,21 @@ import { listInvoices } from '../actions/invoiceActions';
 import Loader from '../components/Loader';
 import styled from 'styled-components';
 import { lightColors, darkColors, H2, Body1, Warning } from '../Styles';
+import { ThemeChange, InvoiceList } from '../Interfaces';
 
 import InvoiceBar from '../components/InvoiceBar';
 import InvoiceItem from '../components/InvoiceItem';
 
-import Empty from '../images/illustration-empty.svg';
+const Empty = require('../images/illustration-empty.svg') as string;
 
 const HomeScreen = () => {
-	const [filter, setFilter] = useState(undefined);
+	const [filter, setFilter] = useState('');
 
 	const dispatch = useDispatch();
 
-	const darkMode = useSelector((state) => state.themeChange);
+	const colortheme = useSelector((state: ThemeChange) => state.themeChange);
 
-	const invoiceList = useSelector((state) => state.invoiceList);
+	const invoiceList = useSelector((state: InvoiceList) => state.invoiceList);
 	const { loading, error, invoices } = invoiceList;
 
 	useEffect(() => {
@@ -25,12 +26,14 @@ const HomeScreen = () => {
 	}, [dispatch]);
 
 	return (
-		<Container colortheme={darkMode.theme}>
+		<Container colortheme={colortheme.theme}>
 			<InvoiceBar
-				colortheme={darkMode.theme}
+				colortheme={colortheme.theme}
 				total={
 					filter
-						? invoices.filter((data) => data.status === filter).length
+						? invoices.filter(
+								(data: { status: string }) => data.status === filter
+						  ).length
 						: invoices.length
 				}
 				filter={filter}
@@ -51,21 +54,21 @@ const HomeScreen = () => {
 				</div>
 			) : (
 				<div className='InvoiceList'>
-					{filter === undefined
+					{filter === ''
 						? invoices.map((item) => (
 								<InvoiceItem
 									key={item.id}
 									item={item}
-									colortheme={darkMode.theme}
+									colortheme={colortheme.theme}
 								/>
-						))
+						  ))
 						: invoices
-								.filter((data) => data.status === filter)
-								.map((item, key) => (
+								.filter((data: { status: string }) => data.status === filter)
+								.map((item, key: number) => (
 									<InvoiceItem
 										key={key}
 										item={item}
-										colortheme={darkMode.theme}
+										colortheme={colortheme.theme}
 									/>
 								))}
 				</div>
@@ -76,7 +79,7 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const Container = styled.div`
+const Container = styled.div<ThemeProps>`
 	height: 100vh;
 	width: 100vw;
 	margin: 0 auto;
@@ -84,9 +87,7 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	background-color: ${({ colortheme }) =>
-		colortheme
-			? `${darkColors.background}`
-			: `${lightColors.background}`};
+		colortheme ? `${darkColors.background}` : `${lightColors.background}`};
 	.EmptyInvoices {
 		height: 341px;
 		width: 242px;

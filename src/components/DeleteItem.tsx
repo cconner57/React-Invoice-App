@@ -8,20 +8,13 @@ import {
 	lightColors,
 	darkColors,
 } from '../Styles';
+import { ThemeProps, DeleteProps } from '../Interfaces';
 
-interface Props {
-	setToggleModal: Function;
-	history: {
-		push: Function;
-	}
-	colortheme: boolean;
-}
-
-interface ThemeProps {
-	colortheme: boolean;
-}
-
-const DeleteItem = ({ setToggleModal, history, colortheme }: Props) => {
+const DeleteItem = ({
+	setToggleModal,
+	history,
+	colortheme,
+}: DeleteProps & ThemeProps) => {
 	const handleOutsideClick = useCallback(
 		(e) => {
 			const outsideForm = document.querySelector('.Modal');

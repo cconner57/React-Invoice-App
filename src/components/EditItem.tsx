@@ -4,11 +4,13 @@ import { H2Alt, Button2, Button3 } from '../Styles';
 
 import InputForm from './InputForm';
 
-const EditItem = ({ invoice }) => {
-	const [editInvoice, setEditInvoice] = useState(invoice);
-	
+interface Invoice {
+	id: string;
+}
 
-	
+const EditItem = ({ invoice }: Invoice) => {
+	const [editInvoice, setEditInvoice] = useState(invoice);
+
 	return (
 		<Container>
 			<H2Alt className='Title'>Edit #{invoice.id}</H2Alt>

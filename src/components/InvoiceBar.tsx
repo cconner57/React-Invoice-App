@@ -14,8 +14,8 @@ import MenuModal from './MenuModal';
 import FilterInvoices from './FilterInvoices';
 import CreateItem from './CreateItem';
 
-import Arrow from '../images/icon-arrow-down.svg';
-import Plus from '../images/icon-plus.svg';
+const Arrow = require('../images/icon-arrow-down.svg') as string;
+const Plus = require('../images/icon-plus.svg') as string;
 
 interface InvoiceBarProps {
 	colortheme: boolean;

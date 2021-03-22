@@ -4,7 +4,7 @@ import {
 	THEME_CHANGE_FAIL,
 } from '../constants/themeConstants';
 
-export const themeChange = () => async (dispatch) => {
+export const themeChange = () => async (dispatch: Function) => {
 	try {
 		dispatch({ type: THEME_CHANGE_REQUEST });
 
