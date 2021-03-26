@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { darkColors, lightColors, colors, H3Alt } from '../Styles';
 import { ThemeProps, ThemeChange } from '../Interfaces';
 
-const Status = ({ status }: string) => {
+const Status = ({ status }: any) => {
 	const colorTheme = useSelector((state: ThemeChange) => state.themeChange);
 
 	return (

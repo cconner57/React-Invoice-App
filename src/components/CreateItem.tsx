@@ -4,23 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { newInvoice, createInvoice } from '../actions/invoiceActions';
 import styled from 'styled-components';
 import { H2Alt, Button2, Button3, Button4, Warning } from '../Styles';
+import { ThemeChange } from '../Interfaces';
 
 import InputForm from './InputForm';
 
 const CreateItem = () => {
-	const invoiceState = useSelector((state) => state.invoiceNew);
+	const invoiceState = useSelector((state: any) => state.invoiceNew);
 	const { loading, error, invoice } = invoiceState;
 
 	const dispatch = useDispatch();
 
 	const [formInvoice, setFormInvoice] = useState(invoice);
 
-	const formHandler = (e) => {
+	const colortheme = useSelector((state: ThemeChange) => state.themeChange);
+
+	const formHandler = (e: any) => {
 		e.preventDefault();
 		console.log(formInvoice);
 		// dispatch(createInvoice(createInvoice));
 	};
-	
+
 	useEffect(() => {
 		dispatch(newInvoice());
 	}, [dispatch]);
@@ -36,8 +39,8 @@ const CreateItem = () => {
 				<form onSubmit={formHandler}>
 					<InputForm invoice={formInvoice} setInvoice={setFormInvoice} />
 					<div className='ButtonGroup'>
-						<Button3>Discard</Button3>
-						<Button4>Save as Draft</Button4>
+						<Button3 colortheme={colortheme.theme}>Discard</Button3>
+						<Button4 colortheme={colortheme.theme}>Save as Draft</Button4>
 						<Button2>Save & Send</Button2>
 					</div>
 				</form>

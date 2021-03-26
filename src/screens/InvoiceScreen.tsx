@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listInvoiceDetails } from '../actions/invoiceActions';
 import Loader from '../components/Loader';
 import Status from '../components/Status';
-import { addComma } from '../Utility.js';
+import { addComma } from '../Utility';
 import styled from 'styled-components';
 import {
 	darkColors,
@@ -18,7 +18,7 @@ import {
 	Button5,
 	Warning,
 } from '../Styles';
-import { ThemeProps, Invoice } from '../Interfaces';
+import { ThemeProps, ThemeChange, InvoiceDetailsState } from '../Interfaces';
 
 import DeleteItem from '../components/DeleteItem';
 import MenuModal from '../components/MenuModal';
@@ -40,18 +40,10 @@ const InvoiceScreen = ({ history, match }: Router) => {
 
 	const dispatch = useDispatch();
 
-	const colorTheme = useSelector(
-		(state: { themeChange: { theme: boolean } }) => state.themeChange
-	);
+	const colortheme = useSelector((state: ThemeChange) => state.themeChange);
 
 	const invoiceDetails = useSelector(
-		(state: {
-			listInvoiceDetails: {
-				loading: string;
-				error: string;
-				invoice: Invoice;
-			};
-		}) => state.listInvoiceDetails
+		(state: InvoiceDetailsState) => state.listInvoiceDetails
 	);
 	const { loading, error, invoice } = invoiceDetails;
 
@@ -60,7 +52,7 @@ const InvoiceScreen = ({ history, match }: Router) => {
 	}, [dispatch, match]);
 
 	return (
-		<Container colortheme={colorTheme.theme}>
+		<Container colortheme={colortheme.theme}>
 			<div className='Back' onClick={() => history.goBack()}>
 				<img src={LeftArrow} alt='Go Back' />
 				<H3>Go back</H3>
@@ -77,7 +69,7 @@ const InvoiceScreen = ({ history, match }: Router) => {
 							<Status status={invoice.status} />
 						</div>
 						<Button3
-							colortheme={colorTheme.theme}
+							colortheme={colortheme.theme}
 							onClick={() => setToggleMenu(!toggleMenu)}>
 							Edit
 						</Button3>
@@ -155,7 +147,7 @@ const InvoiceScreen = ({ history, match }: Router) => {
 				<DeleteItem
 					setToggleModal={setToggleModal}
 					history={history}
-					colortheme={colorTheme.theme}
+					colortheme={colortheme.theme}
 				/>
 			)}
 			{toggleMenu && (
@@ -169,7 +161,7 @@ const InvoiceScreen = ({ history, match }: Router) => {
 
 export default InvoiceScreen;
 
-const Container = styled.div<ThemeProps>`
+const Container = styled.div<{ colortheme: boolean }>`
 	height: 100vh;
 	width: auto;
 	margin: 0 auto;

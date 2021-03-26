@@ -1,3 +1,7 @@
+export interface Colors {
+	[key: string]: string;
+}
+
 export interface ThemeProps {
 	colortheme: boolean;
 	accent: string;
@@ -70,4 +74,12 @@ export interface Invoice {
 		}
 	];
 	total: number;
+}
+
+export interface InvoiceDetailsState {
+	listInvoiceDetails: {
+		loading: string;
+		error: string;
+		invoice: Invoice;
+	};
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeChange } from '../actions/themeActions';
 import styled from 'styled-components';

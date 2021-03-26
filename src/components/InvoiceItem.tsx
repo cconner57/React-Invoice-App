@@ -1,15 +1,13 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightColors, darkColors, H3, H3Alt, Body1 } from '../Styles';
 import { addComma, modifyDate } from '../Utility';
-import { ThemeProps, ItemProps } from '../Interfaces';
 
 import Status from './Status';
 
-const rightArrow = require('../images/icon-arrow-right.svg') as string;
+import RightArrow from '../images/icon-arrow-right.svg';
 
-const InvoiceItem = ({ item, colortheme }: ItemProps & ThemeProps) => {
+const InvoiceItem = ({ item, colortheme }: any) => {
 	const { id, paymentDue, clientName, total, status } = item;
 
 	return (
@@ -22,14 +20,14 @@ const InvoiceItem = ({ item, colortheme }: ItemProps & ThemeProps) => {
 			<Body1>{clientName}</Body1>
 			<H3>${addComma(total)}</H3>
 			<Status status={status} />
-			<img src={rightArrow} alt='Right Arrow' />
+			<RightArrow />
 		</Container>
 	);
 };
 
 export default InvoiceItem;
 
-const Container = styled(Link)<ThemeProps>`
+const Container = styled(Link)<{ colortheme: boolean }>`
 	min-height: 72px;
 	max-width: 730px;
 	margin-bottom: 16px;
@@ -70,7 +68,7 @@ const Container = styled(Link)<ThemeProps>`
 		width: 120px;
 		margin-right: 40px;
 	}
-	img {
+	svg {
 		margin: 0 24px 0 20px;
 	}
 `;

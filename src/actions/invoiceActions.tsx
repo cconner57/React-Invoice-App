@@ -159,27 +159,27 @@ export const createInvoice = () => async (dispatch: Function) => {
 	}
 };
 
-export const updateInvoice = (invoice: object) => async (dispatch: Function) => {
-	try {
-		dispatch({
-			type: INVOICE_UPDATE_REQUEST,
-		});
+// export const updateInvoice = (invoice: object) => async (dispatch: Function) => {
+// 	try {
+// 		dispatch({
+// 			type: INVOICE_UPDATE_REQUEST,
+// 		});
 
-		const { data } = await axios.put(`/api/products/${invoice._id}`, invoice);
+// 		const { data } = await axios.put(`/api/products/${invoice._id}`, invoice);
 
-		dispatch({
-			type: INVOICE_UPDATE_SUCCESS,
-			payload: data,
-		});
-		dispatch({ type: INVOICE_DETAILS_SUCCESS, payload: data });
-	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-		dispatch({
-			type: INVOICE_UPDATE_FAIL,
-			payload: message,
-		});
-	}
-};
+// 		dispatch({
+// 			type: INVOICE_UPDATE_SUCCESS,
+// 			payload: data,
+// 		});
+// 		dispatch({ type: INVOICE_DETAILS_SUCCESS, payload: data });
+// 	} catch (error) {
+// 		const message =
+// 			error.response && error.response.data.message
+// 				? error.response.data.message
+// 				: error.message;
+// 		dispatch({
+// 			type: INVOICE_UPDATE_FAIL,
+// 			payload: message,
+// 		});
+// 	}
+// };

@@ -4,12 +4,12 @@ import { H3Alt, Body1, Button6, Warning } from '../Styles';
 
 import ListItem from './FormItem';
 
-const InputForm = ({ invoice, setInvoice }) => {
+const InputForm = ({ invoice, setInvoice }: any) => {
 	const [senderAddress, setSenderAddress] = useState({});
 	const [clientAddress, setClientAddress] = useState({});
 	const [error, setError] = useState(false);
 
-	const onChangeHandler = (e) => {
+	const onChangeHandler = (e: any) => {
 		const { name, value, dataset } = e.target;
 		if (dataset.address === 'senderAddress') {
 			return setSenderAddress({ ...senderAddress, [name]: value });
@@ -160,7 +160,7 @@ const InputForm = ({ invoice, setInvoice }) => {
 					<Body1>Price</Body1>
 					<Body1>Total</Body1>
 				</div>
-				{invoice?.items?.map((item, key) => (
+				{invoice?.items?.map((item: any, key: number) => (
 					<ListItem
 						key={key}
 						item={item}

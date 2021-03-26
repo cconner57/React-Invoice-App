@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-
-interface Colors {
-	[key: string]: string;
-}
+import { Colors, ThemeProps } from './Interfaces';
 
 export const colors: Colors = {
 	white: 'hsl(0,0%,100%)',
@@ -55,10 +52,6 @@ export const darkColors: Colors = {
 	shadow: 'hsla(232, 38%, 75%, 0.8)',
 };
 
-interface ThemeProps {
-	colortheme: boolean;
-}
-
 export const Button1 = styled.button`
 	height: 48px;
 	width: 150px;
@@ -82,7 +75,7 @@ export const Button2 = styled.button`
 	}
 `;
 
-export const Button3 = styled.button<ThemeProps>`
+export const Button3 = styled.button<{ colortheme: boolean }>`
 	height: 48px;
 	width: auto;
 	padding: 0 24px;
@@ -97,12 +90,11 @@ export const Button3 = styled.button<ThemeProps>`
 	}
 `;
 
-export const Button4 = styled.button<ThemeProps>`
+export const Button4 = styled.button<{ colortheme: boolean }>`
 	height: 48px;
 	width: auto;
 	padding: 0 24px;
-	/* color: ${({ colortheme }) =>
-		colortheme ? darkColors.text : colors.accent}; */
+	color: ${({ colortheme }) => (colortheme ? darkColors.text : colors.accent)};
 	background-color: hsl(231, 20%, 27%);
 	transition: background-color 0.25s ease;
 	&:hover {

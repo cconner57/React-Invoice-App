@@ -1,5 +1,5 @@
-const useFormValidator = (input) => {
-	let errors = {};
+const useFormValidator = (input: any) => {
+	let errors: any = {};
 	if (input.type === 'email' && input.value === '') {
 		errors.email = 'Email address is required';
 	} else if (

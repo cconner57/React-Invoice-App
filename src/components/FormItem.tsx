@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Delete = require('../images/icon-delete.svg') as string;
 
-const FormItem = ({ item, changeHandler }) => {
+const FormItem = ({ item, changeHandler }: any) => {
 	const { name, quantity, price, total } = item;
 
 	return (

@@ -55,7 +55,7 @@ const HomeScreen = () => {
 			) : (
 				<div className='InvoiceList'>
 					{filter === ''
-						? invoices.map((item) => (
+						? invoices.map((item: any) => (
 								<InvoiceItem
 									key={item.id}
 									item={item}
@@ -64,7 +64,7 @@ const HomeScreen = () => {
 						  ))
 						: invoices
 								.filter((data: { status: string }) => data.status === filter)
-								.map((item, key: number) => (
+								.map((item: any, key: number) => (
 									<InvoiceItem
 										key={key}
 										item={item}
@@ -79,7 +79,7 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const Container = styled.div<ThemeProps>`
+const Container = styled.div<{ colortheme: boolean }>`
 	height: 100vh;
 	width: 100vw;
 	margin: 0 auto;

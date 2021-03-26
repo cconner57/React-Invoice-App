@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { H2Alt, Button2, Button3 } from '../Styles';
+import { ThemeChange } from '../Interfaces';
 
 import InputForm from './InputForm';
 
-interface Invoice {
-	id: string;
-}
-
-const EditItem = ({ invoice }: Invoice) => {
+const EditItem = ({ invoice }: any) => {
 	const [editInvoice, setEditInvoice] = useState(invoice);
+
+	const colortheme = useSelector((state: ThemeChange) => state.themeChange);
 
 	return (
 		<Container>
-			<H2Alt className='Title'>Edit #{invoice.id}</H2Alt>
+			<H2Alt className='Title'>Edit #{invoice}</H2Alt>
 			<form onSubmit={(e) => e.preventDefault()}>
 				<InputForm invoice={editInvoice} setInvoice={setEditInvoice} />
 				<div className='ButtonGroup'>
-					<Button3>Cancel</Button3>
+					<Button3 colortheme={colortheme.theme}>Cancel</Button3>
 					<Button2>Save Changes</Button2>
 				</div>
 			</form>
